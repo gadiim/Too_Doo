@@ -1,0 +1,72 @@
+# Список справ
+
+    - назва
+    - дата/час виконання
+    - опис справи
+    - теги
+    - пріорітет справи
+
+# Видалити
+
+# Редагувати
+
+# Збереження списку справ
+
+# Створити проєкт
+
+# Внести справу в проєкт
+
+# Сформувати список справ
+    - на день
+    - на тиждень
+    - на місяць
+
+# Пошук справ
+    - за назвою    
+    - за словами в описі  
+    - за тегом/тегами  
+    - за пріоритетом  
+
+///////////////////////////////////////////////////////////////
+
+# To-do list
+
+    - name
+    - date/time of execution
+    - description of the case
+    - tags
+    - the priority of the case
+
+# Remove
+
+# Edit
+
+# Save to-do list
+
+# Create a project
+
+# Enter the case into the project
+
+# Create a to-do list
+    - per day
+    - for a week
+    - for a month
+
+# Search cases
+    - by name
+    - according to the words in the description
+    - by tag/tags
+    - by priority
+
+///////////////////////////////////////
+TodoListComponent: Відображає список справ.
+TodoItemComponent: Відображає окрему справу.
+TodoFormComponent: Форма для створення та редагування справ.
+TodoDetailComponent: Відображає деталі окремої справи.
+ProjectComponent: Відображає список проектів.
+ProjectFormComponent: Форма для створення та редагування проектів.
+ProjectDetailComponent: Відображає деталі окремого проекту.
+SearchComponent: Компонент для пошуку справ за різними критеріями.
+FilterComponent: Компонент для фільтрації справ за тегами, пріоритетом тощо.
+PriorityComponent: Компонент для вибору пріоритету справи.
+TagComponent: Компонент для вибору тегів.
