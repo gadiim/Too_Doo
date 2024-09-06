@@ -5,18 +5,21 @@
 //     description: string = '';
 //     tags: string[] = [];
 //     priority: number = 0;
+//     isCompleted: boolean = false
 //     constructor(id: number,
 //         title: string,
 //         dueDate: Date,
 //         description: string,
 //         tags: string[],
-//         priority: number) {
+//         priority: number,
+//         isCompleted: boolean) {
 //         this.id = id;
 //         this.title = title;
 //         this.dueDate = dueDate;
 //         this.description = description;
 //         this.tags = tags;
 //         this.priority = priority;
+//         this.isCompleted = isCompleted;
 //     };
 // };
 
@@ -27,6 +30,7 @@ export class TodoItem {
       public dueDate: Date,
       public description: string,
       public tags: string[],
-      public priority: number
+      public priority: number,
+      public isCompleted: boolean
     ) {}
   }
