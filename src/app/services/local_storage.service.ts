@@ -1,8 +1,31 @@
-import { Injectable } from '@angular/core'; // Importing Injectable decorator from Angular core
-import { TodoItem } from '../models/todo_item'; // Importing TodoItem model
+// import { Injectable } from '@angular/core'; // Importing Injectable decorator from Angular core
+// import { TodoItem } from '../models/todo_item'; // Importing TodoItem model
+
+// @Injectable({
+//   providedIn: 'root' // This service will be provided in the root injector
+// })
+// export class LocalStorageService {
+
+//   private storageKey = 'todoItems'; // Key used to store and retrieve data from Local Storage
+
+//   constructor() { }
+
+//   saveTodoItems(todoItems: TodoItem[]): void {
+//     // Method to save TodoItems array to Local Storage
+//     localStorage.setItem(this.storageKey, JSON.stringify(todoItems));
+//   }
+
+//   loadTodoItems(): TodoItem[] {
+//     // Method to load TodoItems array from Local Storage
+//     const data = localStorage.getItem(this.storageKey);
+//     return data ? JSON.parse(data) : []; // Parse the data if it exists, otherwise return an empty array
+//   }
+// }
+import { Injectable } from '@angular/core';
+import { TodoItem } from '../models/todo_item';
 
 @Injectable({
-  providedIn: 'root' // This service will be provided in the root injector
+  providedIn: 'root'
 })
 export class LocalStorageService {
 
@@ -11,13 +34,22 @@ export class LocalStorageService {
   constructor() { }
 
   saveTodoItems(todoItems: TodoItem[]): void {
-    // Method to save TodoItems array to Local Storage
-    localStorage.setItem(this.storageKey, JSON.stringify(todoItems));
+    // Check if localStorage is available
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(this.storageKey, JSON.stringify(todoItems));
+    } else {
+      console.log('Local Storage is not available.');
+    }
   }
 
   loadTodoItems(): TodoItem[] {
-    // Method to load TodoItems array from Local Storage
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : []; // Parse the data if it exists, otherwise return an empty array
+    // Check if localStorage is available
+    if (typeof localStorage !== 'undefined') {
+      const data = localStorage.getItem(this.storageKey);
+      return data ? JSON.parse(data) : [];
+    } else {
+      console.log('Local Storage is not available.');
+      return [];
+    }
   }
 }

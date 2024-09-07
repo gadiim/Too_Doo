@@ -1,11 +1,12 @@
 import { Component } from '@angular/core'; // Importing Component decorator from Angular core
 import { TodoItem } from '../../models/todo_item'; // Importing TodoItem model
 import { TodoItemService } from '../../services/todo_item.service'; // Importing TodoItemService
+import { DatePipe, NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-todo-list', // Selector for the component
   standalone: true, // Indicates that this component is standalone
-  imports: [], // List of modules to import (currently empty)
+  imports: [ NgForOf, DatePipe], // List of modules to import (currently empty)
   templateUrl: './todo-list.component.html', // Path to the component's HTML template
   styleUrl: './todo-list.component.css' // Path to the component's CSS styles
 })

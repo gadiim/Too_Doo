@@ -1,1 +1,22 @@
-<p>todo-list works!</p>
+<ul>
+    <li *ngFor="let todo of todoItems">
+      <p>{{todo.title}}</p>
+      <p>{{todo.dueDate | date }}</p>
+      <p>{{todo.description}}</p>
+      <p>{{todo.tags}}</p>
+      <p>{{todo.priority}}</p>
+      <p>{{todo.isCompleted}}</p>
+      
+      <p>
+        <!-- <button (click)="updateTodoItem(todo.id)" class="edit-button"></button> -->
+        <button (click)="updateTodoItem(todo)" class="edit-button">
+          <img src="assets/icons/person_edit.svg" alt="person_edit icon" />
+        </button>
+      </p>
+      <p>
+        <button (click)="deleteTodoItem(todo.id)" class="remove-button">
+          <img src="assets/icons/person_remove.svg" alt="person_remove icon" />
+        </button>
+      </p>
+    </li>
+  </ul>
