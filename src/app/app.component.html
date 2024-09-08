@@ -1,1 +1,25 @@
-<div><app-todo-list></app-todo-list></div>
+<!-- <img src="assets/icons/group.svg" alt="group icon" /> -->
+<!-- app.component.html -->
+<button (click)="showForm()">Add</button>
+
+<div *ngIf="isFormVisible">
+
+    <app-todo-form 
+  *ngIf="isFormVisible" 
+  [todoItem]="selectedTodoItem" 
+  (saved)="onTodoItemAdded()" 
+  (canceled)="onFormCanceled()">
+</app-todo-form>
+
+</div>
+<hr>
+<app-todo-list (edit)="editTodoItem($event)"></app-todo-list>
+
+
+<!-- <button (click)="toggleFormVisibility()">Add</button>
+
+<div *ngIf="isFormVisible">
+    <app-todo-form ></app-todo-form>
+</div>
+<hr>
+<app-todo-list></app-todo-list> -->

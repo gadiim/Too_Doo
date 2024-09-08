@@ -1,0 +1,17 @@
+<!-- todo-form.component.html -->
+
+<div>
+    <div *ngIf="todoItem.id">Edit Too-Doo</div> <!-- Edit -->
+    <div *ngIf="!todoItem.id">Add new Too-Doo</div> <!-- Add -->
+    <form (ngSubmit)="onSave()">
+        <div>
+            <label for="todoItem-title">Title:
+                <input id="todoItem-title" [(ngModel)]="todoItem.title" name="title" required>
+            </label>
+        </div>
+
+        <button type="button" (click)="onCancel()">Cancel</button>
+        <button type="submit" (click)="onCancel()">Apply</button>
+    </form>
+</div>
+  

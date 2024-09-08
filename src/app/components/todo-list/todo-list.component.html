@@ -1,22 +1,13 @@
-<ul>
-    <li *ngFor="let todo of todoItems">
-      <p>{{todo.title}}</p>
-      <p>{{todo.dueDate | date }}</p>
-      <p>{{todo.description}}</p>
-      <p>{{todo.tags}}</p>
-      <p>{{todo.priority}}</p>
-      <p>{{todo.isCompleted}}</p>
-      
-      <p>
-        <!-- <button (click)="updateTodoItem(todo.id)" class="edit-button"></button> -->
-        <button (click)="updateTodoItem(todo)" class="edit-button">
-          <img src="assets/icons/person_edit.svg" alt="person_edit icon" />
-        </button>
-      </p>
-      <p>
-        <button (click)="deleteTodoItem(todo.id)" class="remove-button">
-          <img src="assets/icons/person_remove.svg" alt="person_remove icon" />
-        </button>
-      </p>
-    </li>
-  </ul>
+<!-- todo-list.component.html -->
+<div *ngFor="let item of todoItems">
+  <p style="color: tomato;">id {{ item.id }}</p>
+  <p>title {{ item.title | uppercase }}</p>
+  <p>date {{ item.dueDate | date:'short' }}</p>
+  <p>description {{ item.description }}</p>
+  <p>tags #{{ item.tags.join(', #') }}</p>
+  <p>priority {{ item.priority }}</p>
+  <p>{{ item.isCompleted ? 'Completed' : 'Pending' }}</p>
+  <button (click)="onEdit(item)">Edit</button>
+
+  <button (click)="deleteTodoItemById(item.id)">Delete</button>
+</div>

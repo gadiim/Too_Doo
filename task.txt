@@ -59,14 +59,21 @@
     - by priority
 
 ///////////////////////////////////////
-TodoListComponent: Відображає список справ.
+
 TodoItemComponent: Відображає окрему справу.
+TagComponent: Компонент для вибору тегів.
+PriorityComponent: Компонент для вибору пріоритету справи.
+TodoListComponent: Відображає список справ.
 TodoFormComponent: Форма для створення та редагування справ.
 TodoDetailComponent: Відображає деталі окремої справи.
-ProjectComponent: Відображає список проектів.
+
+ProjectComponent: Відображає окремий проект.
+ProjectListComponent: Відображає список проектів.
 ProjectFormComponent: Форма для створення та редагування проектів.
-ProjectDetailComponent: Відображає деталі окремого проекту.
+LocalStorageComponent: Компонент для збереження та зчитування даних з файлу
 SearchComponent: Компонент для пошуку справ за різними критеріями.
-FilterComponent: Компонент для фільтрації справ за тегами, пріоритетом тощо.
-PriorityComponent: Компонент для вибору пріоритету справи.
-TagComponent: Компонент для вибору тегів.
+FilterComponent: Компонент для фільтрації справ.
+
+???
+NotificationComponent: Компонент для налаштування та відображення нотифікацій для нагадування про справи.
+ReportComponent: Компонент для формування звітів про виконані справи.

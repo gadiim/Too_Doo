@@ -1,34 +1,84 @@
-import { Component } from '@angular/core'; // Importing Component decorator from Angular core
-import { TodoItem } from '../../models/todo_item'; // Importing TodoItem model
-import { TodoItemService } from '../../services/todo_item.service'; // Importing TodoItemService
-import { DatePipe, NgForOf } from '@angular/common';
+// import { Component } from '@angular/core';
+// import { CommonModule } from '@angular/common';
+// import { TodoItem } from '../../models/todoItem';
+// import { TodoListService } from '../../services/todo-list.service';
+// import { NgForOf, DatePipe } from '@angular/common';
+// // import { Router } from '@angular/router';
+
+// @Component({
+//   selector: 'app-todo-list',
+//   standalone: true,
+//   imports: [CommonModule, NgForOf, DatePipe],
+//   templateUrl: './todo-list.component.html',
+//   styleUrls: ['./todo-list.component.css']
+// })
+// export class TodoListComponent {
+//   todoItems: TodoItem[] = [];
+//   constructor(private todoListService: TodoListService){};
+
+//   ngOnInit(): void {
+//     // Lifecycle hook that runs after the component's view has been initialized
+//     this.todoItems = this.todoListService.getTodoItems(); // Fetching TodoItems from the service
+//   }
+
+//   deleteTodoItemById(id: number): void {
+//     // Method to delete a TodoItem by id
+//     this.todoListService.deleteTodoItemById(id); // Deleting the item using the service
+//     this.todoItems = this.todoListService.getTodoItems(); // Refreshing the list of TodoItems
+//   }
+
+//   updateTodoItemById(updatedTodoItem: TodoItem): void {
+//     // Method to update an existing TodoItem
+//     this.todoListService.updateTodoItemById(updatedTodoItem); // Updating the item using the service
+//     this.todoItems = this.todoListService.getTodoItems(); // Refreshing the list of TodoItems
+//   }
+// }
+
+// todo-list.component.ts
+import { Component, Output, EventEmitter} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TodoItem } from '../../models/todoItem';
+import { TodoListService } from '../../services/todo-list.service';
+import { NgForOf, DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-todo-list', // Selector for the component
-  standalone: true, // Indicates that this component is standalone
-  imports: [ NgForOf, DatePipe], // List of modules to import (currently empty)
-  templateUrl: './todo-list.component.html', // Path to the component's HTML template
-  styleUrl: './todo-list.component.css' // Path to the component's CSS styles
+  selector: 'app-todo-list',
+  standalone: true,
+  imports: [CommonModule, NgForOf, DatePipe],
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent {
-  todoItems: TodoItem[] = []; // Array to hold TodoItems
+  todoItems: TodoItem[] = [];
 
-  constructor(private todoItemService: TodoItemService){}; // Injecting TodoItemService
+  @Output() edit = new EventEmitter<TodoItem>();  // Подія для редагування завдання
+
+  constructor(private todoListService: TodoListService){}
 
   ngOnInit(): void {
-    // Lifecycle hook that runs after the component's view has been initialized
-    this.todoItems = this.todoItemService.getTodoItems(); // Fetching TodoItems from the service
+    this.todoItems = this.todoListService.getTodoItems();
   }
 
-  deleteTodoItem(id: number): void {
-    // Method to delete a TodoItem by id
-    this.todoItemService.deleteTodoItem(id); // Deleting the item using the service
-    this.todoItems = this.todoItemService.getTodoItems(); // Refreshing the list of TodoItems
+  getTodoItems(): void {
+   this.todoItems = this.todoListService.getTodoItems();
   }
 
-  updateTodoItem(updatedTodoItem: TodoItem): void {
-    // Method to update an existing TodoItem
-    this.todoItemService.updateTodoItem(updatedTodoItem); // Updating the item using the service
-    this.todoItems = this.todoItemService.getTodoItems(); // Refreshing the list of TodoItems
+  deleteTodoItemById(id: number): void {
+    this.todoListService.deleteTodoItemById(id); 
+    this.getTodoItems(); // Оновлення списку після видалення елемента
+  }
+
+  updateTodoItemById(updatedTodoItem: TodoItem): void {
+    this.todoListService.updateTodoItemById(updatedTodoItem); 
+    this.getTodoItems(); // Оновлення списку після редагування елемента
+  }
+
+  renewTodoList(): void {
+    this.todoItems = this.todoListService.getTodoItems(); // Отримання списку завдань зі служби
+  }
+
+  // Метод для редагування елемента, який викликає подію редагування
+  onEdit(todoItem: TodoItem): void {
+    this.edit.emit(todoItem);
   }
 }
