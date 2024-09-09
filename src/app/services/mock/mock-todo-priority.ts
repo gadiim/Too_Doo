@@ -1,8 +1,8 @@
 // mock-todo-priority.ts
 export const mockPriority = [
-    { id: 1, value: 'critical' },
-    { id: 2, value: 'high' },
-    { id: 3, value: 'medium' },
-    { id: 4, value: 'low' },
-    { id: 5, value: 'very Low' }
+    { id: 1, value: 'critical', symbol: '★★★★★' },
+    { id: 2, value: 'high', symbol: '★★★★☆'  },
+    { id: 3, value: 'medium', symbol: '★★★☆☆'  },
+    { id: 4, value: 'low', symbol: '★★☆☆☆'  },
+    { id: 5, value: 'very low', symbol: '★☆☆☆☆'  }
 ];

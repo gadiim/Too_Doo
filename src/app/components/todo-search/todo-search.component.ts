@@ -1,4 +1,4 @@
-// components/search/search.component.ts
+// components/todo-search/todo-search.component.ts
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -15,11 +15,11 @@ export class TodoSearchComponent {
   @Output() search = new EventEmitter<string>(); // EventEmitter to pass search query to parent component
 
   onSearch(): void {
-    this.search.emit(this.searchText); // Emit the search query when the user clicks the search button
+    this.search.emit(this.searchText.trim()); // Emit the search query when the user clicks the search button
   }
 
   onClear(): void {
     this.searchText = ''; // Clear the search input
-    this.search.emit(this.searchText); // Emit the empty query to reset the search results
+    this.search.emit(''); // Emit the empty query to reset the search results
   }
 }

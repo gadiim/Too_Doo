@@ -38,9 +38,10 @@ button.active {
     display: flex;
     flex-direction: column;
     flex: 0.25;
+    padding: 10px;
 
 
-    background-color: aqua;
+    border: dotted 2px aqua;
 }
 /*  */
 .list-container {
@@ -63,6 +64,7 @@ button.active {
     /* flex: 0.3; */
     /* flex-basis: calc(25% - 10px); */
     /* flex-basis: calc(33.33% - 10px); */
+    /* background-color: coral; */
 }
 /*  */
 .form-container {

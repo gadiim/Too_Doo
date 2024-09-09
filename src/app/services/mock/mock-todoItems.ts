@@ -46,7 +46,7 @@ export const mockTodoItems: TodoItem[] = [
     'Jog in the park',        
     new Date('2024-09-11T16:00:00'), 
     'Morning jog in the fresh air.',                   
-    ['health', 'leisure'],     
+    ['health'],     
     'Low', 
     0,
     false

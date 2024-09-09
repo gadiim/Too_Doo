@@ -21,8 +21,8 @@ export class TodoFormComponent {
   @Output() canceled = new EventEmitter<void>(); // Подія для інформування батьківського компонента
   @Output() closed = new EventEmitter<void>();
   
-  mockTags = mockTags; // Додаємо mockTags до компонента
-  mockPriority = mockPriority; // Додаємо mockRatings до компонента
+  mockTags = mockTags;            // Додаємо mockTags до компонента
+  mockPriority = mockPriority;    // Додаємо mockRatings до компонента
 
   constructor(private todoListService: TodoListService) { }
 

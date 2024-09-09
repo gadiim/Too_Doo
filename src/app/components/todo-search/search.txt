@@ -1,0 +1,182 @@
+// app.component.ts
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
+import { TodoSearchComponent } from './components/todo-search/todo-search.component';
+import { TodoItem } from './models/todoItem';
+import { NgIf } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, NgIf, TodoListComponent, TodoFormComponent, TodoSearchComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Too_Doo';
+  isFormVisible: boolean = false;
+  selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', [], '', 0, false);
+  searchText: string = ''; // Текст пошуку для передачі в TodoListComponent
+
+  toggleFormVisibility(): void {
+    this.isFormVisible = !this.isFormVisible;
+  }
+
+  onFormClosed(): void {
+    this.isFormVisible = false;
+  }
+
+  showForm(): void {
+    this.isFormVisible = true;
+    this.selectedTodoItem = new TodoItem(0, '', new Date(), '', [], '', 0, false); // Для створення нової задачі
+  }
+
+  closeForm(): void {
+    this.isFormVisible = false;
+  }
+
+  onTodoItemAdded(): void {
+    this.toggleFormVisibility(); // Закриває форму після збереження
+  }
+
+  onFormCanceled(): void {
+    this.toggleFormVisibility(); // Закриває форму після скасування
+  }
+
+  editTodoItem(todoItem: TodoItem): void {
+    this.selectedTodoItem = todoItem; // Встановлюємо існуючий елемент для редагування
+    this.isFormVisible = true;
+  }
+
+  // Метод для обробки події пошуку
+  onSearch(searchText: string): void {
+    this.searchText = searchText; // Оновлення тексту пошуку
+  }
+
+  // Метод для обробки очищення пошуку
+  onClear(): void {
+    this.searchText = ''; // Очищення тексту пошуку
+  }
+}
+
+<!-- app.component.html -->
+<div class="app-container">
+    <!-- search block -->
+    <app-todo-search (search)="onSearch($event)" (clear)="onClear()">
+    </app-todo-search>
+
+    <div class="nav-container">
+        <button (click)="showForm()">Add</button>
+
+        <div class="form-container" *ngIf="isFormVisible">
+            <app-todo-form *ngIf="isFormVisible" [todoItem]="selectedTodoItem" (saved)="onTodoItemAdded()"
+                (canceled)="onFormCanceled()">
+            </app-todo-form>
+        </div>
+    </div>
+
+    <div class="body-wrapper">
+        <div class="filter-container">
+            filters
+        </div>
+        <div class="list-container">
+            <app-todo-list class="todo-card" [searchText]="searchText" (edit)="editTodoItem($event)">
+            </app-todo-list>
+        </div>
+    </div>
+</div>
+
+// components/todo-list/todo-list.component.ts
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TodoItem } from '../../models/todoItem';
+import { TodoListService } from '../../services/todo-list.service';
+import { NgForOf, DatePipe } from '@angular/common';
+
+@Component({
+  selector: 'app-todo-list',
+  standalone: true,
+  imports: [CommonModule, NgForOf, DatePipe],
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.css']
+})
+export class TodoListComponent implements OnChanges {
+  todoItems: TodoItem[] = [];
+  filteredItems: TodoItem[] = []; // Змінна для зберігання відфільтрованих елементів
+  displayItems: TodoItem[] = []; // Змінна для відображення елементів у шаблоні
+
+  @Input() searchText: string = ''; // Отримуємо текст пошуку з AppComponent
+  @Output() edit = new EventEmitter<TodoItem>();  // Подія для редагування завдання
+
+  constructor(private todoListService: TodoListService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchText']) {
+      this.filterItems(); // Фільтруємо елементи при зміні тексту пошуку
+    }
+  }
+
+  ngOnInit(): void {
+    this.todoItems = this.todoListService.getTodoItems();
+    this.filteredItems = [...this.todoItems]; // Ініціалізуємо filteredItems всіма завданнями
+    this.displayItems = [...this.todoItems]; // Початкове значення displayItems - це всі завдання
+  }
+
+  getTodoItems(): void {
+    this.todoItems = this.todoListService.getTodoItems();
+    this.filteredItems = this.todoItems;
+    this.displayItems = [...this.todoItems]; // Оновлення displayItems після отримання елементів
+  }
+
+  deleteTodoItemById(id: number): void {
+    this.todoListService.deleteTodoItemById(id);
+    this.getTodoItems(); // Оновлення списку після видалення елемента
+  }
+
+  updateTodoItemById(updatedTodoItem: TodoItem): void {
+    this.todoListService.updateTodoItemById(updatedTodoItem);
+    this.getTodoItems(); // Оновлення списку після редагування елемента
+  }
+
+  renewTodoList(): void {
+    this.todoItems = this.todoListService.getTodoItems(); // Отримання списку завдань зі служби
+    this.filteredItems = this.todoItems; 
+    this.displayItems = [...this.todoItems]; // Оновлення displayItems
+  }
+
+  onEdit(todoItem: TodoItem): void {
+    this.edit.emit(todoItem);
+  }
+
+  private filterItems(): void {
+    if (this.searchText.trim()) {
+      this.filteredItems = this.todoItems.filter(item =>
+        item.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        item.description.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+      this.displayItems = this.filteredItems; // Встановлюємо відфільтровані елементи для відображення
+    } else {
+      this.displayItems = [...this.todoItems]; // Якщо пошуку немає, показуємо всі елементи
+    }
+  }
+}
+<!-- components/todo-list/todo-list.component.html -->
+<ng-container class="todo-card" *ngFor="let item of displayItems">
+  <div>
+    <div class="header">
+      <div style="color: tomato;">id {{ item.id }}</div>
+      <div>{{ item.title | uppercase }}</div>
+    </div>
+
+    <div class="body">
+      <div>date {{ item.dueDate | date:'short' }}</div>
+      <div>description {{ item.description }}</div>
+      <div>priority {{ item.priority | uppercase }}</div>
+      <div>{{ item.isCompleted ? 'Completed' : 'Pending' }}</div>
+      <button (click)="onEdit(item)">Edit</button>
+      <button (click)="deleteTodoItemById(item.id)">Delete</button>
+    </div>
+  </div>
+</ng-container>

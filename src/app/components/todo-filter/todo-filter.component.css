@@ -1,0 +1,48 @@
+.toggle-container {
+    display: flex;
+    border-bottom: solid 1px;
+    border-color: #ccc;
+    color: grey;
+    justify-content: space-between;
+    margin: 5px 10px 0 10px;
+    cursor: pointer;
+}
+
+.clear-button {
+    flex: 1;
+} 
+
+.priority-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    padding: 10px 25px;
+}
+
+.priority-button-wrapper {
+    margin: 1px 0;   
+}
+
+.priority-button-wrapper div{
+    float: right;   
+}
+
+.priority-button-container button {
+    padding: 5px 30px;    
+}
+
+.tag-button-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px 25px;
+}
+
+.tag-button-wrapper {
+    
+}
+.tag-button-container button {
+    padding: 5px 10px;
+    flex-basis: calc(33.33% - 2px);
+}

@@ -1,17 +1,10 @@
 <!-- <img src="assets/icons/group.svg" alt="group icon" /> -->
 <!-- app.component.html -->
 <div class="app-container">
-    <!--  search block beg -->
-    <div class="app-container">
 
-    <!--  search block end -->
-    <!--  search block beg -->
-    <!-- Вставка компонента пошуку -->
-    <!-- <app-todo-search (search)="onSearch($event)"></app-todo-search> -->
-    <div>
+    <div class="header-container">
         <app-todo-search></app-todo-search>
-      </div>
-    <!--  search block end -->
+    </div>
 
     <div class="nav-container">
         <button (click)="showForm()">Add</button>
@@ -22,11 +15,11 @@
             </app-todo-form>
         </div>
     </div>
-    <!-- <hr> -->
 
     <div class="body-wrapper">
         <div class="filter-container">
-            <div>2</div>
+                <app-todo-filter></app-todo-filter>
+            
         </div>
         <div class="list-container">
             <app-todo-list class="todo-card" (edit)="editTodoItem($event)"></app-todo-list>
@@ -34,11 +27,3 @@
     </div>
 
 </div>
-
-<!-- <button (click)="toggleFormVisibility()">Add</button>
-
-<div *ngIf="isFormVisible">
-    <app-todo-form ></app-todo-form>
-</div>
-<hr>
-<app-todo-list></app-todo-list> -->

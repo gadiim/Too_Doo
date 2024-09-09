@@ -72,7 +72,7 @@ ProjectListComponent: Відображає список проектів.
 ProjectFormComponent: Форма для створення та редагування проектів.
 LocalStorageComponent: Компонент для збереження та зчитування даних з файлу
     TodoSearchComponent: Компонент для пошуку справ за різними критеріями.
-FilterComponent: Компонент для фільтрації справ.
+    TodoFilterComponent: Компонент для фільтрації справ.
 
 ???
 NotificationComponent: Компонент для налаштування та відображення нотифікацій для нагадування про справи.

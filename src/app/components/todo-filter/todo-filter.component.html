@@ -1,0 +1,49 @@
+<!-- components/todo-filter/todo-filter.component.html -->
+<div class="filter-container">
+
+    <div (click)="togglePriorityContainer()" class="toggle-container">
+        priority
+        <ng-container *ngIf="isPriorityContainerVisible; else showIcon">
+            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+        </ng-container>
+        <ng-template #showIcon>
+            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+        </ng-template>
+    </div>
+    
+    <div *ngIf="isPriorityContainerVisible" class="priority-button-container">
+        <div class="priority-button-wrapper" *ngFor="let priority of mockPriority">           
+                <button (click)="highlightPriority(priority.value)">
+                    {{ priority.symbol }}
+                </button>
+                <div>{{ priority.value }}</div>
+            
+        </div>
+        <button class="clear-button" (click)="clearPriority()">
+            Clear
+        </button>
+    </div>
+
+    <div (click)="toggleTagContainer()" class="toggle-container">
+        tag
+        <ng-container *ngIf="isTagContainerVisible; else showIcon">
+            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+        </ng-container>
+        <ng-template #showIcon>
+            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+        </ng-template>
+    </div>
+    
+    <div *ngIf="isTagContainerVisible" class="tag-button-container">
+        <div class="tag-button-wrapper" *ngFor="let tag of mockTags">
+            <button (click)="highlightTag(tag.name)">
+                #{{ tag.name }}
+            </button>
+        </div>
+        <button  class="clear-button" (click)="clearTag()">
+            Clear
+        </button>
+    </div>
+
+
+</div>
