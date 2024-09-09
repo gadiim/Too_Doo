@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
+import { TodoSearchComponent } from './components/todo-search/todo-search.component';
 import { TodoItem } from './models/todoItem';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, TodoListComponent, TodoFormComponent],
+  imports: [RouterOutlet, NgIf, TodoListComponent, TodoFormComponent, TodoSearchComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
