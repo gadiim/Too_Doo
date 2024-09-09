@@ -1,15 +1,17 @@
 // todo-form.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor, UpperCasePipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { TodoItem } from '../../models/todoItem';
 import { TodoListService } from '../../services/todo-list.service';
+import { mockTags } from '../../services/mock/mock-todo-tags';
+import { mockPriority } from '../../services/mock/mock-todo-priority';
 
 @Component({
   selector: 'app-todo-form',
   standalone: true,
-  imports: [NgIf, FormsModule, DatePipe],
+  imports: [NgIf, NgFor, FormsModule, DatePipe, UpperCasePipe],
   templateUrl: './todo-form.component.html',
   styleUrls: ['./todo-form.component.css']
 })
@@ -19,6 +21,9 @@ export class TodoFormComponent {
   @Output() canceled = new EventEmitter<void>(); // Подія для інформування батьківського компонента
   @Output() closed = new EventEmitter<void>();
   
+  mockTags = mockTags; // Додаємо mockTags до компонента
+  mockPriority = mockPriority; // Додаємо mockRatings до компонента
+
   constructor(private todoListService: TodoListService) { }
 
   onSave(): void {

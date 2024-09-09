@@ -1,0 +1,82 @@
+
+button {
+    margin: 0;
+    flex: 0.5;
+    background-color: #0c59e7;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+button.active {
+    background-color: #3979ef;
+    color: white;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.nav-container {
+    display: flex;
+    width: 100%;
+    /* flex: 1; */
+    justify-content: space-between;
+}
+
+.body-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+/*  */
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    flex: 0.25;
+
+
+    background-color: aqua;
+}
+/*  */
+.list-container {
+    display: flex-inline;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0.75;
+    height: 500px;
+    padding: 20px;
+    overflow: auto;
+
+    background-color: blueviolet;
+}
+/*  */
+.todo-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* width: 150px; */
+    /* flex: 0.3; */
+    /* flex-basis: calc(25% - 10px); */
+    /* flex-basis: calc(33.33% - 10px); */
+}
+/*  */
+.form-container {
+    display: flex;
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 50px;
+    background-color: inherit;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #3979ef;
+
+    background-color: chartreuse;
+}

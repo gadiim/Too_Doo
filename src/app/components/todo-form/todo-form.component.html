@@ -5,13 +5,40 @@
     <div *ngIf="!todoItem.id">Add new Too-Doo</div> <!-- Add -->
     <form (ngSubmit)="onSave()">
         <div>
-            <label for="todoItem-title">Title:
-                <input id="todoItem-title" [(ngModel)]="todoItem.title" name="title" required>
-            </label>
+            <p>
+                <label for="todoItem-title">title:
+                    <input id="todoItem-title" [(ngModel)]="todoItem.title" name="title" type="text" required>
+                </label>
+            </p>
+            <p>
+                <label for="todoItem-dueDate">date:
+                    <input id="todoItem-dueDate" [(ngModel)]="todoItem.dueDate" name="dueDate" type="datetime-local"
+                        required>
+                </label>
+            </p>priority:
+            <select for="todoItem-priority" [(ngModel)]="todoItem.priority" name="priority" required>
+                <option *ngFor="let priority of mockPriority" [ngValue]="priority.value">{{ priority.value }}</option>
+            </select>
+            <p>
+                <label for="todoItem-description">description:
+                    <input id="todoItem-description" [(ngModel)]="todoItem.description" name="description" type="text"
+                        required>
+                </label>
+            </p>
+            <p>
+                <!-- <select id="todoItem-tags" [(ngModel)]="todoItem.tags" name="tags" required>
+                    <option *ngFor="let tag of mockTags" [ngValue]="tag.name">{{ tag.name }}</option>
+                </select>
+            </p> -->
+            <p>
+                <label for="todoItem-isCompleted">completed:
+                    <input id="todoItem-isCompleted" [(ngModel)]="todoItem.isCompleted" name="isCompleted"
+                        type="checkbox" required>
+                </label>
+            </p>
         </div>
 
         <button type="button" (click)="onCancel()">Cancel</button>
         <button type="submit" (click)="onCancel()">Apply</button>
     </form>
 </div>
-  
