@@ -1,3 +1,4 @@
+// models/todoItem.ts
 export class TodoItem {
     id: number = 0;
     title: string = '';

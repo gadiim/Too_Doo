@@ -1,4 +1,4 @@
-// todo-form.component.ts
+// components/todo-form/todo-form.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor, UpperCasePipe } from '@angular/common';
