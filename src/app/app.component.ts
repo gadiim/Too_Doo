@@ -5,6 +5,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import { TodoSearchComponent } from './components/todo-search/todo-search.component';
+import { TodoListService } from './services/todo-list.service';
 import { TodoItem } from './models/todoItem';
 import { NgIf } from '@angular/common';
 
@@ -17,12 +18,14 @@ import { NgIf } from '@angular/common';
 })
 
 export class AppComponent {
+  constructor(private todoListService: TodoListService) {}
   title = 'Too_Doo';
   isFormVisible: boolean = false;
-  selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
+  selectedTodoItem: any = null; // changed for 'remove all'
+  // selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
 
   filters = { priority: '', tag: '' };
-  
+
   toggleFormVisibility(): void {
     this.isFormVisible = !this.isFormVisible;
   }
@@ -55,6 +58,15 @@ export class AppComponent {
 
   applyFilters(filters: { priority: string; tag: string }): void {
     this.filters = filters;
+  }
+
+  removeTodoItems(): void {
+    this.todoListService.clearTodoItems();
+    // Оновіть список задач у компоненті, якщо потрібно
+    // Наприклад, скинути фільтри або зробити інші дії
+    this.filters = { priority: '', tag: '' }; // Скидаємо фільтри
+    // Скидаємо вибраний елемент, якщо потрібно
+    this.selectedTodoItem = null;
   }
 
 }

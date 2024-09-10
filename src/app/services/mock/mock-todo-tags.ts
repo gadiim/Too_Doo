@@ -6,5 +6,6 @@ export const mockTags = [
     { id: 4, name: "meeting" },
     { id: 5, name: "leisure" },
     { id: 6, name: "study" },
-    { id: 7, name: "travel" }
+    { id: 7, name: "travel" },
+    { id: 8, name: "household" },
 ];

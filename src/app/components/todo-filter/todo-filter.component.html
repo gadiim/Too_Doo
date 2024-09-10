@@ -21,9 +21,15 @@
             </button>
             <div>{{ priority.value }}</div>
         </div>
-        <button class="clear-button" (click)="clearPriority(); onFilterChange()">
-            Clear
-        </button>
+        <div class="clear-button-wrapper">
+            <button 
+                class="clear-button" 
+                [ngClass]="{'active': selectedPriority === ''}"
+                (click)="clearPriority(); 
+                onFilterChange()">
+                    Clear
+            </button>
+        </div>
     </div>
 
     <div (click)="toggleTagContainer()" class="toggle-container">
@@ -44,9 +50,15 @@
                 #{{ tag.name }}
             </button>
         </div>
-        <button class="clear-button" (click)="clearTag(); onFilterChange()">
-            Clear
-        </button>
+        <div class="clear-button-wrapper">
+            <button 
+                class="clear-button"
+                [ngClass]="{'active': selectedTag === ''}" 
+                (click)="clearTag(); 
+                onFilterChange()">
+                Clear
+            </button>
+        </div>
     </div>
 
 </div>

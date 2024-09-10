@@ -108,7 +108,7 @@ export class TodoListComponent {
 /// filter block begin
   applyFilters(): void {
     let filteredItems = this.todoListService.getTodoItems();
-console.log('Filtering by priority:', this.filters.priority); 
+    console.log('Filtering by priority:', this.filters.priority);
     if (this.filters.priority) {
       filteredItems = filteredItems.filter(item => item.priority === this.filters.priority);
     }
@@ -132,4 +132,10 @@ console.log('Filtering by priority:', this.filters.priority);
   onEdit(todoItem: TodoItem): void {
     this.edit.emit(todoItem);
   }
+
+  clearTodoItems():void{
+    this.todoListService.clearTodoItems();
+    this.getTodoItems();
+  };
+
 }

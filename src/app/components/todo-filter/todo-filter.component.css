@@ -27,10 +27,6 @@ button.active {
     cursor: pointer;
 }
 
-.clear-button {
-    flex: 1;
-} 
-
 .priority-button-container {
     display: flex;
     flex-direction: column;
@@ -65,3 +61,13 @@ button.active {
     padding: 5px 10px;
     flex-basis: calc(33.33% - 2px);
 }
+
+.clear-button-wrapper {
+    width: 100%;
+}
+
+.clear-button {
+    display: block;
+    width: 100%;
+    margin-top: 3px;
+} 
