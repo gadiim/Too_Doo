@@ -18,12 +18,17 @@
 
     <div class="body-wrapper">
         <div class="filter-container">
-                <app-todo-filter></app-todo-filter>
-            
+          <app-todo-filter 
+          (filteredTodo)="applyFilters($event)">
+        </app-todo-filter>
         </div>
         <div class="list-container">
-            <app-todo-list class="todo-card" (edit)="editTodoItem($event)"></app-todo-list>
+          <app-todo-list 
+          class="todo-card" 
+          [filters]="filters" 
+          (edit)="editTodoItem($event)">
+        </app-todo-list>
         </div>
-    </div>
+      </div>
 
 </div>

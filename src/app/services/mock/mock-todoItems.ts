@@ -8,7 +8,7 @@ export const mockTodoItems: TodoItem[] = [
     new Date('2024-09-07T10:00:00'), 
     'Complete all features and test the application.', 
     'work',       
-    'Critical',
+    'critical',
     0, 
     false
   ),
@@ -18,7 +18,7 @@ export const mockTodoItems: TodoItem[] = [
     new Date('2024-09-08T14:30:00'), 
     'Purchase milk, bread, eggs, and vegetables.',     
     'household',  
-    'Medium', 
+    'medium', 
     0,
     false
   ),
@@ -28,7 +28,7 @@ export const mockTodoItems: TodoItem[] = [
     new Date('2024-09-09T18:00:00'), 
     'Discuss project progress and next steps.',        
     'work',       
-    'High', 
+    'high', 
     0,
     false
   ),
@@ -37,7 +37,7 @@ export const mockTodoItems: TodoItem[] = [
     new Date('2024-09-10T09:45:00'), 
     'Read the new novel by a favorite author.',        
     'leisure',    
-    'Very Low', 
+    'very low', 
     0,
     false
   ),
@@ -47,7 +47,7 @@ export const mockTodoItems: TodoItem[] = [
     new Date('2024-09-11T16:00:00'), 
     'Morning jog in the fresh air.',                   
     'health',     
-    'Low', 
+    'low', 
     0,
     false
   )

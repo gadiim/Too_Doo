@@ -21,6 +21,8 @@ export class AppComponent {
   isFormVisible: boolean = false;
   selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
 
+  filters = { priority: '', tag: '' };
+  
   toggleFormVisibility(): void {
     this.isFormVisible = !this.isFormVisible;
   }
@@ -50,5 +52,10 @@ export class AppComponent {
     this.selectedTodoItem = todoItem; // Встановлюємо існуючий елемент для редагування
     this.isFormVisible = true;
   }
+
+  applyFilters(filters: { priority: string; tag: string }): void {
+    this.filters = filters;
+  }
+
 }
 
