@@ -41,10 +41,9 @@ export class TodoListComponent {
   }
 
   renewTodoList(): void {
-    this.todoItems = this.todoListService.getTodoItems(); // Отримання списку завдань зі служби
+    this.todoItems = this.todoListService.getTodoItems();
   }
 
-  // Метод для редагування елемента, який викликає подію редагування
   onEdit(todoItem: TodoItem): void {
     this.edit.emit(todoItem);
   }
@@ -56,14 +55,15 @@ export class TodoListComponent {
   //   this.selectedPriority = todoPriority;
   //  }
 
-  /// searfilterch block end 
+  /// filter block end 
 
   /// search block begin
-  @Input() search = new EventEmitter<string>(); //input search from todo-search 
-  searchedText: string = ''; //clear button is active
-  highlightSearchedText(todoItems: string) {
-    this.searchedText = todoItems;
-  }
+
+  // @Input() search = new EventEmitter<string>(); //input search from todo-search 
+  // searchedText: string = ''; //clear button is active
+  // highlightSearchedText(todoItems: string) {
+  //   this.searchedText = todoItems;
+  // }
   /// search block end 
 }
 

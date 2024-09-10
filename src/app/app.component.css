@@ -75,10 +75,14 @@ button.active {
     left: 50%;
     transform: translate(-50%, -50%);
 
+    width: 50vw;
+    height: auto;
+
     padding: 50px;
-    background-color: inherit;
     border-radius: 5px;
     box-shadow: 0 0 5px #3979ef;
 
     background-color: chartreuse;
+
+    opacity: 0.5;
 }

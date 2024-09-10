@@ -4,7 +4,7 @@ export class TodoItem {
     title: string = '';
     dueDate: Date = new Date('YYYY-MM-DDTHH:mm:ss');
     description: string = '';
-    tags: string[] = [];
+    tag: string = '';
     priority: string = '';
     projectId?: number;
     isCompleted: boolean = false;
@@ -13,7 +13,7 @@ export class TodoItem {
         title: string,
         dueDate: Date,
         description: string,
-        tags: string[],
+        tag: string,
         priority: string,
         projectId: number,
         isCompleted: boolean,
@@ -22,7 +22,7 @@ export class TodoItem {
         this.title = title;
         this.dueDate = dueDate;
         this.description = description;
-        this.tags = tags;
+        this.tag = tag;
         this.priority = priority;
         this.projectId = projectId;
         this.isCompleted = isCompleted;

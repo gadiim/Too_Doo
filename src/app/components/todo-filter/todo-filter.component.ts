@@ -29,10 +29,10 @@ export class TodoFilterComponent {
   mockTags = mockTags;
 
   selectedPriority: any;
-  isPriorityContainerVisible = true;
+  isPriorityContainerVisible = false;
 
   selectedTag: any;
-  isTagContainerVisible = true;
+  isTagContainerVisible = false;
 
   constructor(private todoListService: TodoListService) { }
 

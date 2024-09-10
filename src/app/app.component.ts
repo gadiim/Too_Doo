@@ -19,7 +19,7 @@ import { NgIf } from '@angular/common';
 export class AppComponent {
   title = 'Too_Doo';
   isFormVisible: boolean = false;
-  selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', [], '', 0, false);
+  selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
 
   toggleFormVisibility(): void {
     this.isFormVisible = !this.isFormVisible;
@@ -31,7 +31,7 @@ export class AppComponent {
 
   showForm(): void {
     this.isFormVisible = true;
-    this.selectedTodoItem = new TodoItem(0, '', new Date(), '', [], '', 0, false); // Для створення нової задачі
+    this.selectedTodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false); // Для створення нової задачі
   }
 
   closeForm(): void {

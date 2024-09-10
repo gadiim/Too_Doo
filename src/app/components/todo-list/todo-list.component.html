@@ -7,10 +7,11 @@
   </div>
 
   <div class="body">
-    <div>date {{ item.dueDate | date:'short' }}</div>
-    <div>description {{ item.description }}</div>
+    <div>date: {{ item.dueDate | date:'short' }}</div>
+    <div>description: {{ item.description }}</div>
+    <div>tag: #{{ item.tag }}</div>
     <!-- <div>tags #{{ item.tags.join(', #') }}</div> -->
-    <div>priority {{ item.priority | uppercase }}</div>
+    <div>priority: {{ item.priority | uppercase }}</div>
     <div>{{ item.isCompleted ? 'Completed' : 'Pending' }}</div>
     <button (click)="onEdit(item)">Edit</button>
 

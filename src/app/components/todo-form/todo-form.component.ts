@@ -16,7 +16,7 @@ import { mockPriority } from '../../services/mock/mock-todo-priority';
   styleUrls: ['./todo-form.component.css']
 })
 export class TodoFormComponent {
-  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', [], '', 0, false);
+  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', '', '', 0, false);
   @Output() todoAdded = new EventEmitter<void>(); // Додаємо EventEmitter для сповіщення про додавання елемента
   @Output() canceled = new EventEmitter<void>(); // Подія для інформування батьківського компонента
   @Output() closed = new EventEmitter<void>();
