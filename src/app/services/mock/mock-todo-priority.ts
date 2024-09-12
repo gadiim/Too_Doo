@@ -1,4 +1,4 @@
-// mock-todo-priority.ts
+// services/mock/mock-todo-priority.ts
 export const mockPriority = [
     { id: 1, value: 'critical', symbol: '★★★★★' },
     { id: 2, value: 'high', symbol: '★★★★☆'  },

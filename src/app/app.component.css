@@ -32,6 +32,7 @@ button.active {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    height: 80vh;
 }
 /*  */
 .filter-container {
@@ -40,6 +41,8 @@ button.active {
     flex: 0.25;
     padding: 10px;
 
+    height: 100%;
+    overflow-y: scroll;
 
     border: dotted 2px aqua;
 }
@@ -49,11 +52,11 @@ button.active {
     flex-direction: row;
     flex-wrap: wrap;
     flex: 0.75;
-    height: 500px;
+    height: 100%;
     padding: 20px;
     overflow: auto;
 
-    background-color: blueviolet;
+    border: dotted 2px blueviolet;
 }
 /*  */
 .todo-card {
@@ -78,9 +81,10 @@ button.active {
     width: 50vw;
     height: auto;
 
+
     padding: 50px;
     border-radius: 5px;
     box-shadow: 0 0 5px #3979ef;
 
-    background-color: chartreuse;
+    background-color: aliceblue;
 }

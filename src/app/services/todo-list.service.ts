@@ -1,4 +1,4 @@
-// todo-list.service.ts
+// services/todo-list.service.ts
 import { Injectable } from '@angular/core';
 import { TodoItem } from '../models/todoItem';
 import { mockTodoItems } from './mock/mock-todoItems'; // mock

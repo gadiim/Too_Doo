@@ -8,6 +8,7 @@ button {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 button:hover {
     opacity: 0.7;
 }
@@ -27,6 +28,21 @@ button.active {
     cursor: pointer;
 }
 
+.iscompleted-button-container {
+    display: block;
+    justify-content: space-between;
+    padding: 10px 25px;
+}
+
+.iscompleted-button-wrapper {
+    margin: 1px 0;
+}
+
+.iscompleted-button-wrapper button {
+    width: 50%;
+    padding: 5px 30px;
+}
+
 .priority-button-container {
     display: flex;
     flex-direction: column;
@@ -36,15 +52,15 @@ button.active {
 }
 
 .priority-button-wrapper {
-    margin: 1px 0;   
+    margin: 1px 0;
 }
 
-.priority-button-wrapper div{
-    float: right;   
+.priority-button-wrapper div {
+    float: right;
 }
 
 .priority-button-container button {
-    padding: 5px 30px;    
+    padding: 5px 30px;
 }
 
 .tag-button-container {
@@ -54,12 +70,22 @@ button.active {
     padding: 10px 25px;
 }
 
-.tag-button-wrapper {
-    
-}
+.tag-button-wrapper {}
+
 .tag-button-container button {
     padding: 5px 10px;
     flex-basis: calc(33.33% - 2px);
+}
+
+.month-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.month-button-wrapper button {
+    height: 45px;
+    width: 45px;
 }
 
 .clear-button-wrapper {
@@ -70,4 +96,4 @@ button.active {
     display: block;
     width: 100%;
     margin-top: 3px;
-} 
+}

@@ -2,6 +2,50 @@
 
 <div class="filter-container">
 
+    <div class="clear-button-wrapper">
+        <button 
+            class="clear-button"
+            [ngClass]="{'active': selectedIsCompleted === null && selectedPriority === '' && selectedTag === ''}" 
+            (click)="clearFilters()">
+            Clear all Filters
+        </button>
+    </div>
+
+
+    <div (click)="toggleIsCompletedContainer()" class="toggle-container">
+        isCompleted
+        <ng-container *ngIf="isIsCompletedContainerVisible; else showIconTag">
+            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+        </ng-container>
+        <ng-template #showIconTag>
+            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+        </ng-template>
+    </div>
+    
+    <div *ngIf="isIsCompletedContainerVisible" class="iscompleted-button-container">
+            <div class="iscompleted-button-wrapper">
+            <button 
+                [ngClass]="{'active': selectedIsCompleted === false}"
+                (click)="highlightIsCompleted(false)">
+                To do
+            </button>
+
+            <button 
+                [ngClass]="{'active': selectedIsCompleted === true}"
+                (click)="highlightIsCompleted(true)">
+                Done
+            </button>
+        </div>
+        <div class="clear-button-wrapper">
+            <button 
+                class="clear-button"
+                [ngClass]="{'active': selectedIsCompleted === null}" 
+                (click)="clearIsCompleted()">
+                Clear
+            </button>
+        </div>
+    </div>
+
     <div (click)="togglePriorityContainer()" class="toggle-container">
         Priority
         <ng-container *ngIf="isPriorityContainerVisible; else showIconPriority">
@@ -16,7 +60,7 @@
         <div class="priority-button-wrapper" *ngFor="let priority of mockPriority">           
             <button 
             [ngClass]="{'active': selectedPriority === priority.value}"
-            (click)="highlightPriority(priority.value); onFilterChange()">
+            (click)="highlightPriority(priority.value)">
                 {{ priority.symbol }}
             </button>
             <div>{{ priority.value }}</div>
@@ -25,8 +69,7 @@
             <button 
                 class="clear-button" 
                 [ngClass]="{'active': selectedPriority === ''}"
-                (click)="clearPriority(); 
-                onFilterChange()">
+                (click)="clearPriority()">
                     Clear
             </button>
         </div>
@@ -46,7 +89,7 @@
         <div class="tag-button-wrapper" *ngFor="let tag of mockTags">
             <button 
                 [ngClass]="{'active': selectedTag === tag.name}"
-                (click)="highlightTag(tag.name); onFilterChange()">
+                (click)="highlightTag(tag.name)">
                 #{{ tag.name }}
             </button>
         </div>
@@ -54,9 +97,37 @@
             <button 
                 class="clear-button"
                 [ngClass]="{'active': selectedTag === ''}" 
-                (click)="clearTag(); 
-                onFilterChange()">
+                (click)="clearTag()">
                 Clear
+            </button>
+        </div>
+    </div>
+
+    <div (click)="toggleMonthsContainer()" class="toggle-container">
+        Months
+        <ng-container *ngIf="isMonthsContainerVisible; else showIconTag">
+            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+        </ng-container>
+        <ng-template #showIconTag>
+            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+        </ng-template>
+    </div>
+    
+    <div *ngIf="isMonthsContainerVisible" class="month-button-container">
+        <div class="month-button-wrapper" *ngFor="let month of months">
+            <button 
+                (click)="highlightMonth(month.id)"
+                [ngClass]="{'active': selectedMonth === month.id}">
+                {{ month.abbreviation }}
+            </button>   
+        </div>
+
+        <div class="clear-button-wrapper">
+            <button 
+                class="clear-button"
+                (click)="clearMonth();" 
+                [ngClass]="{'active': selectedMonth === 0}">
+                    Clear
             </button>
         </div>
     </div>

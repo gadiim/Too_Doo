@@ -21,10 +21,16 @@ export class AppComponent {
   constructor(private todoListService: TodoListService) {}
   title = 'Too_Doo';
   isFormVisible: boolean = false;
+
   selectedTodoItem: any = null; // changed for 'remove all'
   // selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
 
-  filters = { priority: '', tag: '' };
+  filters: { isCompleted: boolean | null, months: number, priority: string, tag: string } = {
+    isCompleted: null,
+    months: 0,
+    priority: '',
+    tag: ''
+  };
 
   toggleFormVisibility(): void {
     this.isFormVisible = !this.isFormVisible;
@@ -56,16 +62,17 @@ export class AppComponent {
     this.isFormVisible = true;
   }
 
-  applyFilters(filters: { priority: string; tag: string }): void {
+  // applyFilters(filters: { isCompleted: boolean | null, months: number, priority: string, tag: string }): void {
+  applyFilters(filters: any): void {
     this.filters = filters;
+    
   }
 
   removeTodoItems(): void {
     this.todoListService.clearTodoItems();
-    // Оновіть список задач у компоненті, якщо потрібно
-    // Наприклад, скинути фільтри або зробити інші дії
-    this.filters = { priority: '', tag: '' }; // Скидаємо фільтри
-    // Скидаємо вибраний елемент, якщо потрібно
+    // скинути фільтри
+    this.filters = { isCompleted: false, months: 0, priority: '', tag: '' }; 
+    // скинути фільтри для bool
     this.selectedTodoItem = null;
   }
 

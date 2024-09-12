@@ -6,6 +6,8 @@ import { TodoItem } from '../../models/todoItem';
 import { TodoListService } from '../../services/todo-list.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
+import { MONTHS } from '../../services/mock/mock-months';
+import { log } from 'console';
 
 @Component({
   selector: 'app-todo-filter',
@@ -19,14 +21,20 @@ export class TodoFilterComponent {
   todoItems: TodoItem[] = [];
 
   // @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', [], '', 0, false);
-  @Output() filteredTodo = new EventEmitter<{ priority: string, tag: string }>();
+  @Output() filteredTodo = new EventEmitter<{ isCompleted: boolean | null, months: number, priority: string, tag: string, }>();
   @Output() todoAdded = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
-  
+  months = MONTHS;
   mockPriority = mockPriority;
   mockTags = mockTags;
+
+  selectedIsCompleted: boolean | null = null;
+  isIsCompletedContainerVisible = false;
+
+  selectedMonth: number = 0;
+  isMonthsContainerVisible = false;
 
   selectedPriority: string = '';
   isPriorityContainerVisible = false;
@@ -38,11 +46,41 @@ export class TodoFilterComponent {
 
   ngOnInit(): void {
     this.todoItems = this.todoListService.getTodoItems();
+    this.onFilterChange();
   }
 
+  highlightIsCompleted(todoIsCompleted: boolean) {
+    this.selectedIsCompleted = todoIsCompleted;
+    this.onFilterChange();
+  }
 
-  highlightPriority(todoPriority: any) {
+  toggleIsCompletedContainer() {
+    this.isIsCompletedContainerVisible = !this.isIsCompletedContainerVisible;
+  }
+
+  clearIsCompleted() {
+    this.selectedIsCompleted = null;//null
+    this.onFilterChange();
+  }
+
+  toggleMonthsContainer() {
+    this.isMonthsContainerVisible = !this.isMonthsContainerVisible;
+  }
+
+  highlightMonth(month: number) {
+    this.selectedMonth = month;
+    this.onFilterChange();
+    console.log('month ' + month)
+  }
+
+  clearMonth() {
+    this.selectedMonth = 0;
+    this.onFilterChange();
+  }
+
+  highlightPriority(todoPriority: string) {
     this.selectedPriority = todoPriority;
+    this.onFilterChange();
   }
 
   togglePriorityContainer() {
@@ -51,10 +89,12 @@ export class TodoFilterComponent {
 
   clearPriority() {
     this.selectedPriority = '';
+    this.onFilterChange();
   }
   
-  highlightTag(todoTag: any) {
+  highlightTag(todoTag: string) {
     this.selectedTag = todoTag;
+    this.onFilterChange();
   }
 
   toggleTagContainer() {
@@ -63,14 +103,26 @@ export class TodoFilterComponent {
   
   clearTag() {
     this.selectedTag = '';
+    this.onFilterChange();
   }
 
-  onFilterChange(): void { // 
+  onFilterChange(): void { 
     this.filteredTodo.emit({
+      isCompleted: this.selectedIsCompleted,
+      months: this.selectedMonth,
       priority: this.selectedPriority,
-      tag: this.selectedTag
+      tag: this.selectedTag,
+      
     });
-    console.log('onFilterChange')
+  }
+
+  clearFilters(): void {
+    this.selectedIsCompleted = null;
+    this.selectedMonth = 0;
+    this.selectedPriority = '';
+    this.selectedTag = '';
+    
+    this.onFilterChange();
   }
 
 }
