@@ -1,0 +1,104 @@
+// src/app/models/filter.model.ts
+
+export interface TodoFilter {
+    isCompleted: boolean | null;
+    daysRange: { startDay: number; endDay: number };
+    months: number;
+    priority: string;
+    tag: string;
+}
+
+export const defaultTodoFilter: TodoFilter = {
+    isCompleted: null,
+    daysRange: { startDay: 0, endDay: 0 }, // Замість day
+    months: 0,
+    priority: '',
+    tag: ''
+};
+
+// components/todo-list/todo-list.component.ts
+...
+  ngOnChanges(): void {
+    if (this.filters.daysRange) {
+        const { startDay, endDay } = this.filters.daysRange;
+        this.todoItems = this.todoItems.filter(item => {
+            const itemDay = new Date(item.dueDate).getDate();
+            return itemDay >= startDay && itemDay <= endDay;
+        });
+    } else {
+        this.applyFilters();
+    }
+}
+...
+
+applyFilters(): void {
+  let filteredItems = this.todoListService.getTodoItems();
+...
+
+  if (this.filters.daysRange.startDay > 0) {
+    filteredItems = filteredItems.filter(item => {
+      const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
+      return dueDate instanceof Date && dueDate.getDate() === this.filters.daysRange.startDay;
+    });
+  }
+
+  ...
+}
+
+// components/todo-filter/todo-filter.component.ts
+
+...
+highlightDay(day: number) {
+  if (this.selectedDays.includes(day)) {
+    // Якщо день вже обрано, то прибираємо його з масиву
+    this.selectedDays = this.selectedDays.filter(d => d !== day);
+  } else {
+    // Якщо день не обрано, додаємо його в масив
+    this.selectedDays.push(day);
+    // Якщо обрано більше двох днів, очищаємо вибір, щоб дозволити створити новий діапазон
+    if (this.selectedDays.length > 2) {
+      this.selectedDays = [day];
+    }
+  }
+  this.onFilterChange();
+}
+
+
+clearDay() {
+  this.selectedDays = [];
+  this.onFilterChange();
+}
+...
+
+  onFilterChange(): void {
+    if (this.selectedDays.length === 2) {
+      const [startDay, endDay] = this.selectedDays.sort((a, b) => a - b);
+      this.filteredTodo.emit({
+        isCompleted: null,
+        daysRange: { startDay, endDay }, // Передаємо діапазон днів
+        months: 0,
+        priority: '',
+        tag: ''
+      });
+    } else {
+      // Якщо вибрано менше або більше двох днів, встановлюємо діапазон днів за замовчуванням
+      this.filteredTodo.emit({
+        isCompleted: null,
+        daysRange: { startDay: 0, endDay: 0 }, // Значення за замовчуванням
+        months: 0,
+        priority: '',
+        tag: ''
+      });
+    }
+  }
+
+  <!-- components/todo-filter/todo-filter.component.html -->
+...
+    <div *ngIf="isDayContainerVisible" class="day-button-container">
+        <div class="day-button-wrapper" *ngFor="let day of days">
+            <button 
+                (click)="highlightDay(day.id)"
+                [ngClass]="{'active': selectedDays.includes(day.id)}">
+                {{ day.id }}
+            </button>   
+        </div> 

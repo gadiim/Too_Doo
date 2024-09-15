@@ -33,6 +33,8 @@ export class TodoListComponent {
     this.applyFilters();
   }
 
+
+
   getTodoItems(): void {
     this.todoItems = this.todoListService.getTodoItems();
     this.applyFilters(); // Фільтруємо при отриманні задач
@@ -92,7 +94,7 @@ applyFilters(): void {
 
   updateTodoItemById(updatedTodoItem: TodoItem): void {
     this.todoListService.updateTodoItemById(updatedTodoItem);
-    this.getTodoItems(); // Оновлення списку після редагування елемента
+    this.getTodoItems(); // update list
   }
 
   onEdit(todoItem: TodoItem): void {

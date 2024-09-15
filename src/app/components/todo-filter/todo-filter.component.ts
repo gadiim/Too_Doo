@@ -29,6 +29,7 @@ export class TodoFilterComponent {
   @Output() closed = new EventEmitter<void>();
 
   days = DAYS;
+  selectedDays: number[] = [];
   months = MONTHS;
   mockPriority = mockPriority;
   mockTags = mockTags;
@@ -84,6 +85,7 @@ clearDay() {
   this.selectedDay = 0;
   this.onFilterChange();
 }
+
 // // // // // // // // // // // // // // // // // //
 // // Months
   toggleMonthsContainer() {
@@ -141,6 +143,8 @@ clearDay() {
       
     });
   }
+
+
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
