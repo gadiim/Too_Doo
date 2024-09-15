@@ -77,15 +77,35 @@ button.active {
     flex-basis: calc(33.33% - 2px);
 }
 
-.month-button-container {
+.day-button-container {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
 }
+.day-button-wrapper {
+    width: calc(14%);
 
+}
+
+.day-button-wrapper button {
+    height: 32px;
+    width: calc(100%);
+}
+
+.month-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.month-button-wrapper {
+    display: flex;
+    width: calc(16%);
+}
 .month-button-wrapper button {
     height: 45px;
-    width: 45px;
+    width: calc(100%);
 }
 
 .clear-button-wrapper {

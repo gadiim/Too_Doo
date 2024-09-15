@@ -55,6 +55,13 @@ applyFilters(): void {
     filteredItems = filteredItems.filter(item => item.isCompleted === this.filters.isCompleted);
   }
 
+  if (this.filters.day > 0) {
+    filteredItems = filteredItems.filter(item => {
+      const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
+      return dueDate instanceof Date && dueDate.getDate() === this.filters.day;
+    });
+  }
+
   if (this.filters.months > 0) { 
     filteredItems = filteredItems.filter(item => {
       // Перетворюємо рядок у дату, якщо це необхідно

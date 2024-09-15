@@ -5,7 +5,12 @@
     <div class="clear-button-wrapper">
         <button 
             class="clear-button"
-            [ngClass]="{'active': selectedIsCompleted === null && selectedPriority === '' && selectedTag === ''}" 
+            [ngClass]="{'active': 
+            selectedIsCompleted === null && 
+            selectedPriority === '' && 
+            selectedTag === '' &&
+            selectedDay === 0 &&
+            selectedMonth === 0}" 
             (click)="clearFilters()">
             Clear all Filters
         </button>
@@ -103,6 +108,40 @@
         </div>
     </div>
 
+    <!-- // // // // // // // // // // // // // // // // // //
+    // // Day -->
+    <div (click)="toggleDayContainer()" class="toggle-container">
+        Days
+        <ng-container *ngIf="isDayContainerVisible; else showIconDay">
+            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+        </ng-container>
+        <ng-template #showIconDay>
+            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+        </ng-template>
+    </div>
+
+    <div *ngIf="isDayContainerVisible" class="day-button-container">
+        <div class="day-button-wrapper" *ngFor="let day of days">
+            <button 
+                (click)="highlightDay(day.id)"
+                [ngClass]="{'active': selectedDay === day.id}">
+                {{ day.id }}
+            </button>   
+        </div>
+    
+        <div class="clear-button-wrapper">
+            <button 
+                class="clear-button"
+                (click)="clearDay();" 
+                [ngClass]="{'active': selectedDay === 0}">
+                    Clear
+            </button>
+        </div>
+    </div>
+
+
+    <!-- // // // // // // // // // // // // // // // // // //
+    // // Months -->
     <div (click)="toggleMonthsContainer()" class="toggle-container">
         Months
         <ng-container *ngIf="isMonthsContainerVisible; else showIconTag">
@@ -112,7 +151,6 @@
             <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
         </ng-template>
     </div>
-    
     <div *ngIf="isMonthsContainerVisible" class="month-button-container">
         <div class="month-button-wrapper" *ngFor="let month of months">
             <button 

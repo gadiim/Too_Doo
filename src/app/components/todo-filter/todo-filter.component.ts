@@ -6,6 +6,7 @@ import { TodoItem } from '../../models/todoItem';
 import { TodoListService } from '../../services/todo-list.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
+import { DAYS } from '../../services/mock/mock-days';
 import { MONTHS } from '../../services/mock/mock-months';
 import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
 import { log } from 'console';
@@ -27,12 +28,16 @@ export class TodoFilterComponent {
   @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
+  days = DAYS;
   months = MONTHS;
   mockPriority = mockPriority;
   mockTags = mockTags;
 
   selectedIsCompleted: boolean | null = null;
   isIsCompletedContainerVisible = false;
+
+  selectedDay: number = 0;
+  isDayContainerVisible = false;
 
   selectedMonth: number = 0;
   isMonthsContainerVisible = false;
@@ -49,7 +54,8 @@ export class TodoFilterComponent {
     this.todoItems = this.todoListService.getTodoItems();
     this.onFilterChange();
   }
-
+// // // // // // // // // // // // // // // // // //
+// // IsCompleted
   highlightIsCompleted(todoIsCompleted: boolean) {
     this.selectedIsCompleted = todoIsCompleted;
     this.onFilterChange();
@@ -63,7 +69,23 @@ export class TodoFilterComponent {
     this.selectedIsCompleted = null;//null
     this.onFilterChange();
   }
+// // // // // // // // // // // // // // // // // //
+// // Day
+toggleDayContainer() {
+  this.isDayContainerVisible = !this.isDayContainerVisible;
+}
 
+highlightDay(day: number) {
+  this.selectedDay = day;
+  this.onFilterChange();
+}
+
+clearDay() {
+  this.selectedDay = 0;
+  this.onFilterChange();
+}
+// // // // // // // // // // // // // // // // // //
+// // Months
   toggleMonthsContainer() {
     this.isMonthsContainerVisible = !this.isMonthsContainerVisible;
   }
@@ -71,14 +93,15 @@ export class TodoFilterComponent {
   highlightMonth(month: number) {
     this.selectedMonth = month;
     this.onFilterChange();
-    console.log('month ' + month)
+    console.log('month: ' + month)
   }
 
   clearMonth() {
     this.selectedMonth = 0;
     this.onFilterChange();
   }
-
+// // // // // // // // // // // // // // // // // //
+// // Priority
   highlightPriority(todoPriority: string) {
     this.selectedPriority = todoPriority;
     this.onFilterChange();
@@ -92,7 +115,8 @@ export class TodoFilterComponent {
     this.selectedPriority = '';
     this.onFilterChange();
   }
-  
+// // // // // // // // // // // // // // // // // //
+// // Tag
   highlightTag(todoTag: string) {
     this.selectedTag = todoTag;
     this.onFilterChange();
@@ -106,10 +130,11 @@ export class TodoFilterComponent {
     this.selectedTag = '';
     this.onFilterChange();
   }
-
+// // // // // // // // // // // // // // // // // //
   onFilterChange(): void { 
     this.filteredTodo.emit({
       isCompleted: this.selectedIsCompleted,
+      day: this.selectedDay,
       months: this.selectedMonth,
       priority: this.selectedPriority,
       tag: this.selectedTag,
@@ -119,6 +144,7 @@ export class TodoFilterComponent {
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
+    this.selectedDay = 0;
     this.selectedMonth = 0;
     this.selectedPriority = '';
     this.selectedTag = '';
