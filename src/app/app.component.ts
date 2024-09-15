@@ -8,7 +8,7 @@ import { TodoSearchComponent } from './components/todo-search/todo-search.compon
 import { TodoListService } from './services/todo-list.service';
 import { TodoItem } from './models/todoItem';
 import { NgIf } from '@angular/common';
-
+import { TodoFilter, defaultTodoFilter } from './models/filter.model';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -20,17 +20,21 @@ import { NgIf } from '@angular/common';
 export class AppComponent {
   constructor(private todoListService: TodoListService) {}
   title = 'Too_Doo';
+
+  filters: TodoFilter = { ...defaultTodoFilter };
+  
   isFormVisible: boolean = false;
 
   selectedTodoItem: any = null; // changed for 'remove all'
   // selectedTodoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
 
-  filters: { isCompleted: boolean | null, months: number, priority: string, tag: string } = {
-    isCompleted: null,
-    months: 0,
-    priority: '',
-    tag: ''
-  };
+  
+  // filters: { isCompleted: boolean | null, months: number, priority: string, tag: string } = {
+  //   isCompleted: null,
+  //   months: 0,
+  //   priority: '',
+  //   tag: ''
+  // };
 
   toggleFormVisibility(): void {
     this.isFormVisible = !this.isFormVisible;
@@ -70,10 +74,8 @@ export class AppComponent {
 
   removeTodoItems(): void {
     this.todoListService.clearTodoItems();
-    // скинути фільтри
-    this.filters = { isCompleted: false, months: 0, priority: '', tag: '' }; 
-    // скинути фільтри для bool
-    this.selectedTodoItem = null;
+    this.filters = { ...defaultTodoFilter };  // Використання дефолтних значень фільтра
+    this.selectedTodoItem = null;  // Скидання вибраного елементу
   }
 
 }

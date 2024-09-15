@@ -6,6 +6,7 @@ import { TodoFilterComponent } from '../todo-filter/todo-filter.component';
 import { TodoListService } from '../../services/todo-list.service';
 import { NgForOf, DatePipe } from '@angular/common';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
+import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -16,12 +17,7 @@ import { mockPriority } from '../../services/mock/mock-todo-priority';
 })
 export class TodoListComponent {
   todoItems: TodoItem[] = [];
-  @Input() filters: { isCompleted: boolean | null, months: number, priority: string, tag: string } = {
-    isCompleted: null,
-    months: 0,
-    priority: '',
-    tag: ''
-  };
+  @Input()  filters: TodoFilter = { ...defaultTodoFilter };
   @Output() edit = new EventEmitter<TodoItem>();
 
   mockPriority = mockPriority;

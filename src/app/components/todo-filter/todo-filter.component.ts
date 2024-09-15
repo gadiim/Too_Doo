@@ -7,6 +7,7 @@ import { TodoListService } from '../../services/todo-list.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
 import { MONTHS } from '../../services/mock/mock-months';
+import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
 import { log } from 'console';
 
 @Component({
@@ -21,7 +22,7 @@ export class TodoFilterComponent {
   todoItems: TodoItem[] = [];
 
   // @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', [], '', 0, false);
-  @Output() filteredTodo = new EventEmitter<{ isCompleted: boolean | null, months: number, priority: string, tag: string, }>();
+  @Output() filteredTodo = new EventEmitter<TodoFilter>();
   @Output() todoAdded = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
