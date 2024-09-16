@@ -1,6 +1,7 @@
 // components/todo-search/todo-search.component.ts
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { log } from 'console';
 
 @Component({
   selector: 'app-todo-search',
@@ -16,6 +17,8 @@ export class TodoSearchComponent {
 
   onSearch(): void {
     this.search.emit(this.searchText.trim());     // Emit the search query when the user clicks the search button
+    console.log('todo-search.component.ts - onSearch()');
+
   }
 
   onClear(): void {

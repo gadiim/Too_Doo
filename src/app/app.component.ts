@@ -36,6 +36,14 @@ export class AppComponent {
   //   tag: ''
   // };
 
+  searchQuery: string = '';
+
+  // Обробник пошуку
+  onSearch(searchText: string): void {
+    this.searchQuery = searchText;
+    console.log('app.component.ts - onSearch(searchText: string)');
+  }
+
   toggleFormVisibility(): void {
     this.isFormVisible = !this.isFormVisible;
   }

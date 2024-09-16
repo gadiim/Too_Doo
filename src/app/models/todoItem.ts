@@ -9,7 +9,8 @@ export class TodoItem {
     projectId?: number;
     isCompleted: boolean = false;
     
-    constructor(id: number,
+    constructor(
+        id: number,
         title: string,
         dueDate: Date,
         description: string,

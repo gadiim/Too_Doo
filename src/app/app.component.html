@@ -3,7 +3,7 @@
 <div class="app-container">
 
     <div class="header-container">
-        <app-todo-search></app-todo-search>
+      <app-todo-search (search)="onSearch($event)"></app-todo-search>
     </div>
 
     <div class="nav-container">
@@ -28,6 +28,7 @@
           <app-todo-list 
           class="todo-card" 
           [filters]="filters" 
+          [searchQuery]="searchQuery" 
           (edit)="editTodoItem($event)">
         </app-todo-list>
         </div>
