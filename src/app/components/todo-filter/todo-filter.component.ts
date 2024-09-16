@@ -29,7 +29,7 @@ export class TodoFilterComponent {
   @Output() closed = new EventEmitter<void>();
 
   days = DAYS;
-  selectedDays: number[] = [];
+  
   months = MONTHS;
   mockPriority = mockPriority;
   mockTags = mockTags;
@@ -37,7 +37,8 @@ export class TodoFilterComponent {
   selectedIsCompleted: boolean | null = null;
   isIsCompletedContainerVisible = false;
 
-  selectedDay: number = 0;
+  // selectedDay: number = 0;
+  selectedDays: number[] = []; // !!!
   isDayContainerVisible = false;
 
   selectedMonth: number = 0;
@@ -76,13 +77,28 @@ toggleDayContainer() {
   this.isDayContainerVisible = !this.isDayContainerVisible;
 }
 
+// highlightDay(day: number) {
+//   this.selectedDay = day;
+//   this.onFilterChange();
+// }
+
 highlightDay(day: number) {
-  this.selectedDay = day;
+  const index = this.selectedDays.indexOf(day);
+  if (index === -1) {
+    this.selectedDays.push(day); // Додаємо новий день, якщо він ще не вибраний
+  } else {
+    this.selectedDays.splice(index, 1); // Видаляємо день, якщо він вже вибраний
+  }
   this.onFilterChange();
 }
 
+// clearDay() {
+//   this.selectedDay = 0;
+//   this.onFilterChange();
+// }
+
 clearDay() {
-  this.selectedDay = 0;
+  this.selectedDays = []; // Очищуємо вибір днів
   this.onFilterChange();
 }
 
@@ -133,22 +149,31 @@ clearDay() {
     this.onFilterChange();
   }
 // // // // // // // // // // // // // // // // // //
-  onFilterChange(): void { 
-    this.filteredTodo.emit({
-      isCompleted: this.selectedIsCompleted,
-      day: this.selectedDay,
-      months: this.selectedMonth,
-      priority: this.selectedPriority,
-      tag: this.selectedTag,
+  // onFilterChange(): void { 
+  //   this.filteredTodo.emit({
+  //     isCompleted: this.selectedIsCompleted,
+  //     day: this.selectedDay,
+  //     months: this.selectedMonth,
+  //     priority: this.selectedPriority,
+  //     tag: this.selectedTag,
       
-    });
-  }
+  //   });
+    onFilterChange(): void {
+      this.filteredTodo.emit({
+        isCompleted: this.selectedIsCompleted,
+        days: this.selectedDays, // Відправляємо масив днів
+        months: this.selectedMonth,
+        priority: this.selectedPriority,
+        tag: this.selectedTag
+      });
+    }
+  
 
 
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
-    this.selectedDay = 0;
+    this.selectedDays = [];
     this.selectedMonth = 0;
     this.selectedPriority = '';
     this.selectedTag = '';

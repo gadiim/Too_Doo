@@ -9,9 +9,9 @@
             selectedIsCompleted === null && 
             selectedPriority === '' && 
             selectedTag === '' &&
-            selectedDay === 0 &&
+            selectedDays.length === 0 && 
             selectedMonth === 0}" 
-            (click)="clearFilters()">
+            (click)="clearFilters()">   <!-- в selectedDays перевіряти довжину масива -->
             Clear all Filters
         </button>
     </div>
@@ -120,7 +120,7 @@
         </ng-template>
     </div>
 
-    <div *ngIf="isDayContainerVisible" class="day-button-container">
+    <!-- <div *ngIf="isDayContainerVisible" class="day-button-container">
         <div class="day-button-wrapper" *ngFor="let day of days">
             <button 
                 (click)="highlightDay(day.id)"
@@ -137,8 +137,25 @@
                     Clear
             </button>
         </div>
-    </div>
-
+    </div> -->
+    <div *ngIf="isDayContainerVisible" class="day-button-container">
+        <div class="day-button-wrapper" *ngFor="let day of days">
+          <button 
+            (click)="highlightDay(day.id)"
+            [ngClass]="{'active': selectedDays.includes(day.id)}"> <!-- Зміна для перевірки вибору кількох днів -->
+            {{ day.id }}
+          </button>   
+        </div>
+      
+        <div class="clear-button-wrapper">
+          <button 
+            class="clear-button"
+            (click)="clearDay();" 
+            [ngClass]="{'active': selectedDays.length === 0}">
+              Clear
+          </button>
+        </div>
+      </div>
     
 
     <!-- // // // // // // // // // // // // // // // // // //

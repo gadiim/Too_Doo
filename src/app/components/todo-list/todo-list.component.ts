@@ -57,12 +57,16 @@ applyFilters(): void {
     filteredItems = filteredItems.filter(item => item.isCompleted === this.filters.isCompleted);
   }
 
-  if (this.filters.day > 0) {
+  if (this.filters.days.length > 0) {
     filteredItems = filteredItems.filter(item => {
       const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
-      return dueDate instanceof Date && dueDate.getDate() === this.filters.day;
+      // Перевіряємо, чи дата є об'єктом Date та чи входить день у масив фільтрів
+      return dueDate instanceof Date && this.filters.days.includes(dueDate.getDate());
     });
   }
+
+
+  
 
   if (this.filters.months > 0) { 
     filteredItems = filteredItems.filter(item => {
