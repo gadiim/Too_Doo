@@ -86,5 +86,9 @@ export class AppComponent {
     this.selectedTodoItem = null;  // Скидання вибраного елементу
   }
 
+  reloadPage(): void {
+    location.reload();
+  }
+  
 }
 

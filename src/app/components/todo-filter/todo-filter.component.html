@@ -54,10 +54,10 @@
     <div (click)="togglePriorityContainer()" class="toggle-container">
         Priority
         <ng-container *ngIf="isPriorityContainerVisible; else showIconPriority">
-            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+            <img class="icon" src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
         </ng-container>
         <ng-template #showIconPriority>
-            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+            <img class="icon" src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
         </ng-template>
     </div>
     
