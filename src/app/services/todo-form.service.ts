@@ -1,7 +1,7 @@
 // services/todo-form.service.ts
 import { Injectable } from '@angular/core';
 import { TodoListService } from './todo-list.service';
-import { TodoItem } from '../models/todoItem';
+import { TodoItem } from '../models/todoItem.model';
 
 @Injectable({
   providedIn: 'root'

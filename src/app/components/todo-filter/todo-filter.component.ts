@@ -2,14 +2,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf, NgFor, UpperCasePipe, DatePipe } from '@angular/common';
-import { TodoItem } from '../../models/todoItem';
+import { TodoItem } from '../../models/todoItem.model';
 import { TodoListService } from '../../services/todo-list.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
 import { DAYS } from '../../services/mock/mock-days';
 import { MONTHS } from '../../services/mock/mock-months';
 import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
-import { log } from 'console';
 
 @Component({
   selector: 'app-todo-filter',

@@ -6,7 +6,7 @@ import { TodoFilterComponent } from './components/todo-filter/todo-filter.compon
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import { TodoSearchComponent } from './components/todo-search/todo-search.component';
 import { TodoListService } from './services/todo-list.service';
-import { TodoItem } from './models/todoItem';
+import { TodoItem } from './models/todoItem.model';
 import { NgIf } from '@angular/common';
 import { TodoFilter, defaultTodoFilter } from './models/filter.model';
 import { Console, log } from 'node:console';

@@ -1,53 +1,30 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class LocalStorageService {
-
-//   constructor() { }
-
-//   public saveData(key: string, value: any): void {
-//     localStorage.setItem(key, JSON.stringify(value));
-//   }
-
-//   public getData(key: string): any {
-//     const data = localStorage.getItem(key);
-//     return data ? JSON.parse(data) : null;
-//   }
-
-//   public removeData(key: string): void {
-//     localStorage.removeItem(key);
-//   }
-
-//   public clearData(): void {
-//     localStorage.clear();
-//   }
-// }
-
+// services/local-storage.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+  constructor() {}
 
-  constructor() { }
-
-  public saveData(key: string, value: any): void {
+  // Збереження даних у LocalStorage
+  setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  public getData(key: string): any {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
+  // Отримання даних з LocalStorage
+  getItem<T>(key: string): T | null {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
   }
 
-  public removeData(key: string): void {
+  // Видалення елемента з LocalStorage
+  removeItem(key: string): void {
     localStorage.removeItem(key);
   }
 
-  public clearData(): void {
+  // Очищення всіх даних LocalStorage
+  clear(): void {
     localStorage.clear();
   }
 }

@@ -1,10 +1,9 @@
 // components/todo-list/todo-list.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TodoItem } from '../../models/todoItem';
+import { CommonModule, NgForOf, DatePipe } from '@angular/common';
+import { TodoItem } from '../../models/todoItem.model';
 import { TodoFilterComponent } from '../todo-filter/todo-filter.component';
 import { TodoListService } from '../../services/todo-list.service';
-import { NgForOf, DatePipe } from '@angular/common';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
 import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
 import { TodoSearchComponent } from '../todo-search/todo-search.component';
@@ -28,8 +27,8 @@ export class TodoListComponent {
 
   constructor(private todoListService: TodoListService) { }
 
-  ngOnInit(): void {
-    this.getTodoItems();
+  ngOnInit(): void {   //список завдань з mock або LocalStorage при ініціалізації
+    this.getTodoItems(); 
   }
 
   ngOnChanges(): void {
@@ -44,15 +43,6 @@ export class TodoListComponent {
     this.applyFilters(); // фільтруємо !
   }
   /// filter block begin
-
-  getMonthFromDate(date: string): string {
-    return date.slice(5, 7);
-  }
-
-  toString(data: number): string {
-    return data < 10 ? '0' + data : String(data); //id XX = data XX number -> string
-  }
-
   // // // // // // // // // // //
   // search
   onSearch(searchText: string): void {
@@ -60,7 +50,6 @@ export class TodoListComponent {
     this.applyFilters();
   }
   // // // // // // // // // // //
-
   applyFilters(): void {
     let filteredItems = this.todoListService.getTodoItems();
 
@@ -76,12 +65,10 @@ export class TodoListComponent {
       });
     }
 
-
     if (this.filters.months > 0) {
       filteredItems = filteredItems.filter(item => {
         // рядок у дату, if необхідно
         const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
-
         // if об'єкт Date => getMonth()
         return dueDate instanceof Date && (dueDate.getMonth() + 1) === this.filters.months;
       });
@@ -94,28 +81,25 @@ export class TodoListComponent {
     if (this.filters.tag) {
       filteredItems = filteredItems.filter(item => item.tag === this.filters.tag);
     }
-
     // search
     if (this.searchQuery) {
-      filteredItems = this.todoItems.filter(item => 
+      filteredItems = filteredItems.filter(item => 
           item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
           ||
           item.description.toLowerCase().includes(this.searchQuery.toLowerCase()));
     }
-
     this.todoItems = filteredItems;  // виводим на дисплей
-    
+  
   }
-
   /// filter block end
 
   deleteTodoItemById(id: number): void {
-    this.todoListService.deleteTodoItemById(id);
+    this.todoListService.deleteTodoItemById(id); // видалення елемента
     this.getTodoItems(); // оновлення todo-list після видалення елемента
   }
 
   updateTodoItemById(updatedTodoItem: TodoItem): void {
-    this.todoListService.updateTodoItemById(updatedTodoItem);
+    this.todoListService.updateTodoItemById(updatedTodoItem); // оновлення елемента
     this.getTodoItems(); // update todo-list
   }
 
@@ -125,7 +109,7 @@ export class TodoListComponent {
 
   clearTodoItems(): void {
     this.todoListService.clearTodoItems();
-    this.getTodoItems();
+    this.getTodoItems(); // оновлення!!!
   };
 
 }

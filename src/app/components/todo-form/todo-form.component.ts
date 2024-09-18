@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor, UpperCasePipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { TodoItem } from '../../models/todoItem';
+import { TodoItem } from '../../models/todoItem.model';
 import { TodoListService } from '../../services/todo-list.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
@@ -33,7 +33,12 @@ export class TodoFormComponent {
       this.todoListService.addTodoItem(this.todoItem);
       this.todoAdded.emit(); // Сповіщення про додавання нового завдання
     }
+   else {
+    // Updating existing item
+    this.todoListService.updateTodoItemById(this.todoItem);
+  }
     this.closeForm(); // Закриває форму після збереження
+    
   }
 
   onCancel(): void {

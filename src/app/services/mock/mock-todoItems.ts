@@ -1,5 +1,5 @@
 // services/mock/mock-todoItems.ts
-import { TodoItem } from '../../models/todoItem';
+import { TodoItem } from '../../models/todoItem.model';
 
 export const mockTodoItems: TodoItem[] = [
   new TodoItem(

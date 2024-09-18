@@ -1,41 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
-import { saveAs } from 'file-saver';
+// components/local-storage/local-storage.component.ts
+
+import { Component } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-local-storage',
-  standalone: true,
-  imports: [CommonModule],
-  providers: [
-    {
-      provide: HttpClient,
-      useFactory: () => provideHttpClient()
-    }
-  ],
   templateUrl: './local-storage.component.html',
   styleUrls: ['./local-storage.component.css']
 })
-export class LocalStorageComponent implements OnInit {
-  data: any;
+export class LocalStorageComponent {
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
-  ngOnInit() {
-    this.http.get('assets/data/todo-items.json').subscribe(response => {
-      this.data = response;
-      this.localStorageService.saveData('todoItems', this.data);
-    });
+  // Приклад: додавання значення в LocalStorage
+  addItemToLocalStorage(): void {
+    this.localStorageService.setItem('myKey', {name: 'Example', value: 100});
   }
 
-  saveData() {
-    const blob = new Blob([JSON.stringify(this.data)], { type: 'application/json' });
-    saveAs(blob, 'todo-items.json');
+  // Приклад: отримання значення з LocalStorage
+  getItemFromLocalStorage(): void {
+    const data = this.localStorageService.getItem('myKey');
+    console.log('Data from LocalStorage:', data);
   }
 
-  loadData() {
-    this.data = this.localStorageService.getData('todoItems');
+  // Приклад: очищення LocalStorage
+  clearLocalStorage(): void {
+    this.localStorageService.clear();
   }
 }
+
+
