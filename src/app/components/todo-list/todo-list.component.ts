@@ -41,7 +41,7 @@ export class TodoListComponent {
 
   getTodoItems(): void {
     this.todoItems = this.todoListService.getTodoItems();
-    this.applyFilters(); // Фільтруємо при отриманні задач
+    this.applyFilters(); // фільтруємо !
   }
   /// filter block begin
 
@@ -58,7 +58,6 @@ export class TodoListComponent {
   onSearch(searchText: string): void {
     this.searchQuery = searchText;
     this.applyFilters();
-    console.log('todo-list.component.ts - onSearch(searchText: string)');
   }
   // // // // // // // // // // //
 
@@ -72,20 +71,18 @@ export class TodoListComponent {
     if (this.filters.days.length > 0) {
       filteredItems = filteredItems.filter(item => {
         const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
-        // Перевіряємо, чи дата є об'єктом Date та чи входить день у масив фільтрів
+        // if дата є об'єктом Date та чи входить день у filtered
         return dueDate instanceof Date && this.filters.days.includes(dueDate.getDate());
       });
     }
 
 
-
-
     if (this.filters.months > 0) {
       filteredItems = filteredItems.filter(item => {
-        // Перетворюємо рядок у дату, якщо це необхідно
+        // рядок у дату, if необхідно
         const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
 
-        // Перевіряємо, чи дійсно це об'єкт Date, перед тим як викликати getMonth()
+        // if об'єкт Date => getMonth()
         return dueDate instanceof Date && (dueDate.getMonth() + 1) === this.filters.months;
       });
     }
@@ -100,24 +97,26 @@ export class TodoListComponent {
 
     // search
     if (this.searchQuery) {
-      filteredItems = filteredItems.filter(item => item.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
-      console.log('todo-list.component.ts - applyFilters()');
-
+      filteredItems = this.todoItems.filter(item => 
+          item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+          ||
+          item.description.toLowerCase().includes(this.searchQuery.toLowerCase()));
     }
 
-    this.todoItems = filteredItems;
+    this.todoItems = filteredItems;  // виводим на дисплей
+    
   }
 
   /// filter block end
 
   deleteTodoItemById(id: number): void {
     this.todoListService.deleteTodoItemById(id);
-    this.getTodoItems(); // Оновлення списку після видалення елемента
+    this.getTodoItems(); // оновлення todo-list після видалення елемента
   }
 
   updateTodoItemById(updatedTodoItem: TodoItem): void {
     this.todoListService.updateTodoItemById(updatedTodoItem);
-    this.getTodoItems(); // update list
+    this.getTodoItems(); // update todo-list
   }
 
   onEdit(todoItem: TodoItem): void {

@@ -26,7 +26,7 @@ export interface TodoFilter {
 
 export const defaultTodoFilter: TodoFilter = {
     isCompleted: null,
-    days: [], // Зберігаємо кілька вибраних днів
+    days: [], // array вибраних днів
     months: 0,
     priority: '',
     tag: ''

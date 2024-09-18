@@ -1,11 +1,11 @@
-[
+  [
     {
       "id": 1,
-      "title": "Finish Too_Doo project",
+      "title": "Finish TooDoo project",
       "dueDate": "2024-09-07T10:00:00",
       "description": "Complete all features and test the application.",
-      "tags": ["work"],
-      "priority": "Critical",
+      "tags": "work",
+      "priority": "critical",
       "isCompleted": false
     },
     {
@@ -13,8 +13,8 @@
       "title": "Buy groceries",
       "dueDate": "2024-09-08T14:30:00",
       "description": "Purchase milk, bread, eggs, and vegetables.",
-      "tags": ["household"],
-      "priority": "Medium",
+      "tags": "household",
+      "priority": "medium",
       "isCompleted": false
     },
     {
@@ -22,8 +22,8 @@
       "title": "Team meeting",
       "dueDate": "2024-09-09T18:00:00",
       "description": "Discuss project progress and next steps.",
-      "tags": ["work"],
-      "priority": "High",
+      "tags": "work",
+      "priority": "high",
       "isCompleted": false
     },
     {
@@ -31,8 +31,8 @@
       "title": "Read a book",
       "dueDate": "2024-09-10T09:45:00",
       "description": "Read the new novel by a favorite author.",
-      "tags": ["leisure"],
-      "priority": "Very Low",
+      "tags": "leisure",
+      "priority": "very low",
       "isCompleted": false
     },
     {
@@ -40,9 +40,8 @@
       "title": "Jog in the park",
       "dueDate": "2024-09-11T16:00:00",
       "description": "Morning jog in the fresh air.",
-      "tags": ["health", "leisure"],
-      "priority": "Low",
+      "tags": "health",
+      "priority": "low",
       "isCompleted": false
     }
   ]
-  

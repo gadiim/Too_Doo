@@ -9,6 +9,7 @@ import { TodoListService } from './services/todo-list.service';
 import { TodoItem } from './models/todoItem';
 import { NgIf } from '@angular/common';
 import { TodoFilter, defaultTodoFilter } from './models/filter.model';
+import { Console, log } from 'node:console';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -76,8 +77,7 @@ export class AppComponent {
 
   // applyFilters(filters: { isCompleted: boolean | null, months: number, priority: string, tag: string }): void {
   applyFilters(filters: any): void {
-    this.filters = filters;
-    
+    this.filters = filters;  
   }
 
   removeTodoItems(): void {

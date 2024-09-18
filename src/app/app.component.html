@@ -2,37 +2,38 @@
 <!-- app.component.html -->
 <div class="app-container">
 
-    <div class="header-container">
-      <img src="../assets/images/logo.png" alt="logo" (click)="reloadPage()" />
-      <app-todo-search (search)="onSearch($event)"></app-todo-search>
+  <div class="header-container">
+    <img id="logo-header" src="../assets/images/logo.png" alt="logo" (click)="reloadPage()" />
+    <div class="mode-wrapper">
+
+      <img id="dark_mode" src="../assets/icons/dark_mode.svg" alt="dark_mode" />
+      <img id="view_mode" src="../assets/icons/view_list.svg" alt="view_list" />
+
+    </div>
+    <app-todo-search (search)="onSearch($event)"></app-todo-search>
+  </div>
+
+  <div class="nav-container">
+    <button (click)="showForm()">Add</button>
+
+    <div class="form-container" *ngIf="isFormVisible">
+      <app-todo-form *ngIf="isFormVisible" [todoItem]="selectedTodoItem" (saved)="onTodoItemAdded()"
+        (canceled)="onFormCanceled()">
+      </app-todo-form>
     </div>
 
-    <div class="nav-container">
-        <button (click)="showForm()">Add</button>
+    <button (click)="removeTodoItems()">Remove All</button>
+  </div>
 
-        <div class="form-container" *ngIf="isFormVisible">
-            <app-todo-form *ngIf="isFormVisible" [todoItem]="selectedTodoItem" (saved)="onTodoItemAdded()"
-                (canceled)="onFormCanceled()">
-            </app-todo-form>
-        </div>
-
-        <button (click)="removeTodoItems()">Remove All</button>
+  <div class="body-wrapper">
+    <div class="filter-container">
+      <app-todo-filter (filteredTodo)="applyFilters($event)">
+      </app-todo-filter>
     </div>
-
-    <div class="body-wrapper">
-        <div class="filter-container">
-          <app-todo-filter 
-          (filteredTodo)="applyFilters($event)">
-        </app-todo-filter>
-        </div>
-        <div class="list-container">
-          <app-todo-list 
-          class="todo-card" 
-          [filters]="filters" 
-          [searchQuery]="searchQuery" 
-          (edit)="editTodoItem($event)">
-        </app-todo-list>
-        </div>
-      </div>
+    <div class="list-container">
+      <app-todo-list class="todo-card" [filters]="filters" [searchQuery]="searchQuery" (edit)="editTodoItem($event)">
+      </app-todo-list>
+    </div>
+  </div>
 
 </div>
