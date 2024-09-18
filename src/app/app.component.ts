@@ -7,14 +7,14 @@ import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import { TodoSearchComponent } from './components/todo-search/todo-search.component';
 import { TodoListService } from './services/todo-list.service';
 import { TodoItem } from './models/todoItem.model';
-import { NgForOf, NgIf } from '@angular/common';
+import { CommonModule, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { TodoFilter, defaultTodoFilter } from './models/filter.model';
-import { Console, log } from 'node:console';
 import { TodoSelectionComponent } from './components/todo-selection/todo-selection.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, NgForOf, TodoListComponent, TodoFormComponent, TodoFilterComponent, TodoSearchComponent, TodoSelectionComponent],
+  imports: [CommonModule, RouterOutlet, DatePipe, NgIf, NgForOf, TodoListComponent, TodoFormComponent, TodoFilterComponent, TodoSearchComponent, TodoSelectionComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -22,6 +22,14 @@ import { TodoSelectionComponent } from './components/todo-selection/todo-selecti
 export class AppComponent {
   constructor(private todoListService: TodoListService) {}
   title = 'Too_Doo';
+ // //  // //  // //  // //  // //  // // 
+ today: Date = new Date();
+ isDateVisible: boolean = false;
+
+  toggleDateVisibility(): void {
+    this.isDateVisible = !this.isDateVisible;
+  }
+  // //  // //  // //  // //  // //  // // 
 
   filters: TodoFilter = { ...defaultTodoFilter };
   
@@ -90,6 +98,7 @@ export class AppComponent {
   reloadPage(): void {
     location.reload();
   }
+
   
 }
 

@@ -1,38 +1,50 @@
 <!-- <img src="assets/icons/group.svg" alt="group icon" /> -->
 <!-- app.component.html -->
 <div class="app-container">
+  <div class="header-wrapper">
+    <div class="header-container">
+      <img id="logo-header" src="../assets/images/logo.png" alt="logo" (click)="reloadPage()" />
+      <div class="mode-wrapper">
 
-  <div class="header-container">
-    <img id="logo-header" src="../assets/images/logo.png" alt="logo" (click)="reloadPage()" />
-    <div class="mode-wrapper">
+        <div class="date-container">
+          <div class="date-popup" [ngClass]="{'show': isDateVisible}">
+            {{ today | date:'longDate' }}
+          </div>
+          <img id="current-date-mode" src="../assets/icons/calendar_clock.svg" alt="calendar_clock" (click)="toggleDateVisibility()" />
+        </div>
+        
+        <hr style="margin-right: 20px;">
 
-      <img id="day-mode" src="../assets/icons/calendar_day.svg" alt="calendar_day" />
-      <img id="week-mode" src="../assets/icons/calendar_month.svg" alt="calendar_month" />
-      <img id="month-mode" src="../assets/icons/calendar_week.svg" alt="calendar_week" />
-      <img id="dark-mode" src="../assets/icons/dark_mode.svg" alt="dark_mode" />
-      <img id="view-mode" src="../assets/icons/view_list.svg" alt="view_list" />
+        <img id="day-mode" src="../assets/icons/calendar_day.svg" alt="calendar_day" />
+        <img id="month-mode" src="../assets/icons/calendar_week.svg" alt="calendar_week" />
+        <img id="week-mode" src="../assets/icons/calendar_month.svg" alt="calendar_month" />
+
+        <hr style="margin-right: 20px;">
+        <img id="view-mode" src="../assets/icons/view_list.svg" alt="view_list" />
+        <img id="dark-mode" src="../assets/icons/dark_mode.svg" alt="dark_mode" />
+
+        <hr style="margin-right: 20px;">
+      </div>
+      <app-todo-search (search)="onSearch($event)"></app-todo-search>
+    </div>
+
+    <div class="nav-container">
+      <button (click)="showForm()">Add</button>
+
+      <div class="form-container" *ngIf="isFormVisible">
+        <app-todo-form *ngIf="isFormVisible" [todoItem]="selectedTodoItem" (saved)="onTodoItemAdded()"
+          (canceled)="onFormCanceled()">
+        </app-todo-form>
+      </div>
+
+      <button (click)="removeTodoItems()">Remove All</button>
 
     </div>
-    <app-todo-search (search)="onSearch($event)"></app-todo-search>
+
+
+    <app-todo-selection [filters]="filters"></app-todo-selection>
   </div>
 
-  <div class="nav-container">
-    <button (click)="showForm()">Add</button>
-
-    <div class="form-container" *ngIf="isFormVisible">
-      <app-todo-form *ngIf="isFormVisible" [todoItem]="selectedTodoItem" (saved)="onTodoItemAdded()"
-        (canceled)="onFormCanceled()">
-      </app-todo-form>
-    </div>
-
-    <button (click)="removeTodoItems()">Remove All</button>
-
-  </div>
-
-  
-  <app-todo-selection [filters]="filters"></app-todo-selection>
-  
-  
 
   <div class="body-wrapper">
     <div class="filter-container">

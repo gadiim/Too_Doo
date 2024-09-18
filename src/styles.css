@@ -1,9 +1,11 @@
 :root {
-    --main-color: #0c59e7;
-    --card-font-color: aliceblue;
-    --main-shadow-color: #3979ef;
-    --shadow-color: gainsboro;
-    --pointer-color: #f8f9fa;
+    --main-color-origin-light-mode: #0c59e7;
+    --secondary-color-origin-light-mode: aliceblue;
+    --card-font-color-origin-light-mode: aliceblue;
+    --main-shadow-color-origin-light-mode: #3979ef;
+    --main-text-white-color-origin-light-mode: white;
+    --secondary-text-blue-color-origin-light-mode: #0c59e7;
+    --main-border-color-origin-light-mode: #ccc;
 }
 
 *,
@@ -22,7 +24,7 @@ html
 button {
     padding: 5px;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid var(--main-border-color-origin-light-mode);
     border-radius: 5px;
     font-size: medium;
 }

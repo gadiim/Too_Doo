@@ -1,6 +1,9 @@
+<!-- components/todo-selection/todo-selection.component.html -->
+
 <div class="filter-selection">
-  <div class="item-selection">{{ filters.isCompleted !== null ? (filters.isCompleted ? 'completed' : 'not completed') :
-    'All' }}</div>
+  <div class="item-selection">
+    {{ filters.isCompleted !== null ? (filters.isCompleted ? '✓ completed' : '☐ not completed') :
+    '🗹 all' }}</div>
   <div class="item-selection"
   [ngStyle]="{ 'display': filters.priority ? 'block' : 'none' }">
 ! {{ filters.priority }}
@@ -8,7 +11,7 @@
 
 <div class="item-selection"
   [ngStyle]="{ 'display': filters.tag ? 'block' : 'none' }">
-# {{ filters.tag }}
+#{{ filters.tag }}
 </div>
 
 <div *ngFor="let day of filters.days">
@@ -19,6 +22,6 @@
 </div>
 
   <div class="item-selection" [ngStyle]="{ 'display': filters.months > 0 ? 'block' : 'none' }">
-    {{ filters.months }}
+    {{ getMonthName(filters.months) }}
   </div>
 </div>

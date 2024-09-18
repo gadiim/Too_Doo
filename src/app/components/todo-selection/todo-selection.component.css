@@ -3,6 +3,7 @@
 }
 
 .item-selection {
+    display: flex;
     width: auto;
     height: auto;
     margin: 5px 10px;

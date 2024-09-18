@@ -53,7 +53,13 @@ export class TodoListService {
   // Отримання всіх елементів
   getTodoItems(): TodoItem[] {
     const storedItems = localStorage.getItem(this.storageKey); // Отримуємо дані з LocalStorage
-    return storedItems ? JSON.parse(storedItems) : []; // Перевіряємо, чи є збережені дані
+    // return storedItems ? JSON.parse(storedItems) : []; // Перевіряємо, чи є збережені дані
+    try {
+      return storedItems ? JSON.parse(storedItems) : [];
+    } catch (error) {
+      console.error('Error parsing todo items from LocalStorage', error);
+      return [];
+    }
   }
 
   // Додавання нового елемента

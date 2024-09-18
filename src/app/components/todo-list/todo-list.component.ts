@@ -39,6 +39,7 @@ export class TodoListComponent {
 
 
   getTodoItems(): void {
+    console.log(this.todoListService.getTodoItems());
     this.todoItems = this.todoListService.getTodoItems();
     this.applyFilters(); // фільтруємо !
   }

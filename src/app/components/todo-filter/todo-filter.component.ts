@@ -28,7 +28,6 @@ export class TodoFilterComponent {
   @Output() closed = new EventEmitter<void>();
 
   days = DAYS;
-  
   months = MONTHS;
   mockPriority = mockPriority;
   mockTags = mockTags;

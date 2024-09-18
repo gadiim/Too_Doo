@@ -2,12 +2,13 @@
 
 <div class="todo-card" *ngFor="let item of todoItems">
   <div class="header">
-    <!-- <div style="color: tomato;">id {{ item.id }}</div> -->
     <div>{{ item.title | uppercase }}</div>
   </div>
 
   <div class="body">
-    <div>date: {{ item.dueDate | date:'short' }}</div> <!-- date:'short' -->
+    <div>date: {{ item.dueDate | date:'longDate' }}</div> <!-- date:'fullDate' -->
+    <div>day: {{ item.dueDate | date:'EEEE' }}</div> <!-- date:'short' -->
+    <div>time: {{ item.dueDate | date:'shortTime' }}</div> <!-- date:'longDate' -->
     <div>description: {{ item.description }}</div>
     <div>tag: #{{ item.tag }}</div>
     <!-- <div>tags #{{ item.tags.join(', #') }}</div> -->

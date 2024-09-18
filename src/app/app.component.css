@@ -1,10 +1,19 @@
-
+:root {
+    --main-color-origin-light-mode: #0c59e7;
+    --secondary-color-origin-light-mode: aliceblue;
+    --card-font-color-origin-light-mode: aliceblue;
+    --main-shadow-color-origin-light-mode: #3979ef;
+    --main-text-white-color-origin-light-mode: white;
+    --secondary-text-blue-color-origin-light-mode: #0c59e7;
+    --main-border-color-origin-light-mode: #ccc;
+}
 
 button {
     margin: 0;
     flex: 0.5;
-    background-color: #0c59e7;
-    color: white;
+    /* background-color: #0c59e7; */
+    background-color: var(--main-color-origin-light-mode);
+    color:var(--main-text-white-color-origin-light-mode);
 }
 
 button:hover {
@@ -12,14 +21,26 @@ button:hover {
 }
 
 button.active {
-    background-color: #3979ef;
-    color: white;
+    background-color: var(--main-shadow-color-origin-light-mode);
+    /* background-color: var(--main-shadow-color); */
+    color: var(--main-text-white-color-origin-light-mode);
 }
 
 .app-container {
     display: flex;
     flex-direction: column;
     margin: 10px;
+}
+
+.header-wrapper{
+    /* position: fixed;
+    top: 0;
+    width: 100vw;
+    justify-content: center;
+    background: white;
+    z-index: 1; */
+    border-bottom: solid 1px var(--main-border-color-origin-light-mode);
+
 }
 
 .header-container {
@@ -36,19 +57,44 @@ button.active {
 }
 
 .mode-wrapper {
+    display: flex;
     width: 100%;
+    justify-content: right;
 }
 
+.date-container {
+    display: flex;
+    align-items: center;
+}
+  
+  .date-popup {
+    width: auto;
+    padding: 1px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0;
+    transform: translateX(0);
+    z-index: 10;
+  }
+  
+  .date-popup.show {
+    opacity: 1;
+    transform: translateX(-25%);
+  }
+  
+#current-date-mode,
 #day-mode,
 #week-mode,
 #month-mode,
 #view-mode,
 #dark-mode {
-    float: right;
     margin-right: 20px;
     cursor: pointer;
 }
 
+#current-date-mode:hover,
+#day-mode:hover,
+#week-mode:hover,
+#month-mode:hover,
 #view-mode:hover,
 #dark-mode:hover {
     opacity: 0.7;
@@ -65,7 +111,7 @@ button.active {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    height: 80vh;
+    height: 75vh;
 }
 /*  */
 .filter-container {
@@ -77,7 +123,7 @@ button.active {
     height: 100%;
     overflow-y: scroll;
 
-    border: dotted 2px aqua;
+    /* border: dotted 2px aqua; */
 }
 /*  */
 .list-container {
@@ -86,10 +132,10 @@ button.active {
     flex-wrap: wrap;
     flex: 0.75;
     height: 100%;
-    padding: 20px;
+    padding: 5px 20px;
     overflow: auto;
 
-    border: dotted 2px blueviolet;
+    /* border: dotted 2px blueviolet; */
 }
 /*  */
 .todo-card {
@@ -117,7 +163,7 @@ button.active {
 
     padding: 50px;
     border-radius: 5px;
-    box-shadow: 0 0 5px #3979ef;
+    box-shadow: 0 0 5px var(--main-shadow-color-origin-light-mode);
 
-    background-color: aliceblue;
+    background-color: var(--card-font-color-origin-light-mode);
 }
