@@ -39,15 +39,18 @@ button.active {
     width: 100%;
 }
 
-#view_mode,
-#dark_mode {
+#day-mode,
+#week-mode,
+#month-mode,
+#view-mode,
+#dark-mode {
     float: right;
     margin-right: 20px;
     cursor: pointer;
 }
 
-#view_mode:hover,
-#dark_mode:hover {
+#view-mode:hover,
+#dark-mode:hover {
     opacity: 0.7;
 }
 

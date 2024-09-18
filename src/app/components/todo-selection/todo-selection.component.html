@@ -1,0 +1,24 @@
+<div class="filter-selection">
+  <div class="item-selection">{{ filters.isCompleted !== null ? (filters.isCompleted ? 'completed' : 'not completed') :
+    'All' }}</div>
+  <div class="item-selection"
+  [ngStyle]="{ 'display': filters.priority ? 'block' : 'none' }">
+! {{ filters.priority }}
+</div>
+
+<div class="item-selection"
+  [ngStyle]="{ 'display': filters.tag ? 'block' : 'none' }">
+# {{ filters.tag }}
+</div>
+
+<div *ngFor="let day of filters.days">
+<div class="item-selection"
+    [ngStyle]="{ 'display': day ? 'block' : 'none' }">
+ {{ day }}
+</div>
+</div>
+
+  <div class="item-selection" [ngStyle]="{ 'display': filters.months > 0 ? 'block' : 'none' }">
+    {{ filters.months }}
+  </div>
+</div>

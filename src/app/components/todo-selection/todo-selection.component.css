@@ -1,0 +1,17 @@
+.filter-selection{
+    display: flex;
+}
+
+.item-selection {
+    width: auto;
+    height: auto;
+    margin: 5px 10px;
+    padding: 0 10px;
+    text-align: center;
+    font-weight: 600;
+    align-items: center;
+    color: #0c59e7;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    background-color: aliceblue;
+}

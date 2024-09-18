@@ -166,9 +166,6 @@ clearDay() {
         tag: this.selectedTag
       });
     }
-  
-
-
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
