@@ -69,8 +69,8 @@ button.active {
   
   .date-popup {
     width: auto;
-    padding: 1px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    padding: 0 1px;
+    transition: transform 0.2s ease, opacity 0.3s ease;
     opacity: 0;
     transform: translateX(0);
     z-index: 10;
@@ -78,13 +78,14 @@ button.active {
   
   .date-popup.show {
     opacity: 1;
-    transform: translateX(-25%);
+    transform: translateX(-5%);
   }
   
 #current-date-mode,
 #day-mode,
 #week-mode,
 #month-mode,
+#overdue-mode,
 #view-mode,
 #dark-mode {
     margin-right: 20px;
@@ -95,6 +96,7 @@ button.active {
 #day-mode:hover,
 #week-mode:hover,
 #month-mode:hover,
+#overdue-mode:hover,
 #view-mode:hover,
 #dark-mode:hover {
     opacity: 0.7;
