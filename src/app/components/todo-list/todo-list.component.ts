@@ -1,12 +1,14 @@
 // components/todo-list/todo-list.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule, NgForOf, DatePipe } from '@angular/common';
-import { TodoItem } from '../../models/todoItem.model';
-import { TodoFilterComponent } from '../todo-filter/todo-filter.component';
-import { TodoListService } from '../../services/todo-list.service';
-import { mockPriority } from '../../services/mock/mock-todo-priority';
+import { TodoItem } from '../../models/item.model';
 import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
+import { TodoListService } from '../../services/todo-list.service';
+import { ProjectListService } from '../../services/project-list.service'; // Імпорт сервісу для проектів
+import { mockPriority } from '../../services/mock/mock-todo-priority';
+import { TodoFilterComponent } from '../todo-filter/todo-filter.component';
 import { TodoSearchComponent } from '../todo-search/todo-search.component';
+
 
 @Component({
   selector: 'app-todo-list',
@@ -16,8 +18,8 @@ import { TodoSearchComponent } from '../todo-search/todo-search.component';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent {
+
   todoItems: TodoItem[] = [];
-  // searchQuery: string = '';
 
   @Input() filters: TodoFilter = { ...defaultTodoFilter };
   @Output() edit = new EventEmitter<TodoItem>();
@@ -25,21 +27,19 @@ export class TodoListComponent {
 
   mockPriority = mockPriority;
 
-  constructor(private todoListService: TodoListService) { }
+  constructor(
+    private todoListService: TodoListService
+  ) { }
 
   ngOnInit(): void {   //список завдань з mock або LocalStorage при ініціалізації
     this.getTodoItems(); 
   }
 
   ngOnChanges(): void {
-    console.log('Filters changed:', this.filters);
     this.applyFilters();
   }
 
-
-
   getTodoItems(): void {
-    console.log(this.todoListService.getTodoItems());
     this.todoItems = this.todoListService.getTodoItems();
     this.applyFilters(); // фільтруємо !
   }
@@ -54,6 +54,11 @@ export class TodoListComponent {
   applyFilters(): void {
     let filteredItems = this.todoListService.getTodoItems();
 
+    // const today = new Date();
+    // today.setHours(0, 0, 0, 0);
+
+
+
     if (this.filters.isCompleted !== null) {
       filteredItems = filteredItems.filter(item => item.isCompleted === this.filters.isCompleted);
     }
@@ -65,6 +70,7 @@ export class TodoListComponent {
         return dueDate instanceof Date && this.filters.days.includes(dueDate.getDate());
       });
     }
+    
 
     if (this.filters.months > 0) {
       filteredItems = filteredItems.filter(item => {
@@ -89,9 +95,20 @@ export class TodoListComponent {
           ||
           item.description.toLowerCase().includes(this.searchQuery.toLowerCase()));
     }
-    this.todoItems = filteredItems;  // виводим на дисплей
+
+    // if (this.filters.isToday) { // Перевірка, чи потрібно фільтрувати за сьогодні
+    //   const today = new Date();
+    //   filteredItems = filteredItems.filter(item => {
+    //     const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
+    //     return dueDate instanceof Date && dueDate.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0);
+    //   });
+    // }
   
+    this.todoItems = filteredItems;  // виводим на дисплей
   }
+
+
+
   /// filter block end
 
   deleteTodoItemById(id: number): void {
@@ -99,10 +116,10 @@ export class TodoListComponent {
     this.getTodoItems(); // оновлення todo-list після видалення елемента
   }
 
-  updateTodoItemById(updatedTodoItem: TodoItem): void {
-    this.todoListService.updateTodoItemById(updatedTodoItem); // оновлення елемента
-    this.getTodoItems(); // update todo-list
-  }
+  // updateTodoItemById(updatedTodoItem: TodoItem): void {
+  //   this.todoListService.updateTodoItemById(updatedTodoItem); // оновлення елемента
+  //   this.getTodoItems(); // update todo-list
+  // }
 
   onEdit(todoItem: TodoItem): void {
     this.edit.emit(todoItem);
@@ -110,7 +127,8 @@ export class TodoListComponent {
 
   clearTodoItems(): void {
     this.todoListService.clearTodoItems();
-    this.getTodoItems(); // оновлення!!!
+    // this.getTodoItems(); // оновлення!!!
+    this.applyFilters();
   };
 
 }

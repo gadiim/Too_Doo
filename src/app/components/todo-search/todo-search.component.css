@@ -6,7 +6,7 @@ button {
     background-color: transparent;
     color: white;
     border: transparent;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .search-bar {
@@ -14,9 +14,9 @@ button {
 }
 
 #search-input {
-border-color: #ccc ;
-border-radius: 5px;
-padding: 5px;
+    border-color: #ccc;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 #search-button,

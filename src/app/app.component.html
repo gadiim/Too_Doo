@@ -1,4 +1,3 @@
-<!-- <img src="assets/icons/group.svg" alt="group icon" /> -->
 <!-- app.component.html -->
 <div class="app-container">
   <div class="header-wrapper">
@@ -15,10 +14,10 @@
         
         <hr style="margin-right: 20px;">
 
-        <img id="day-mode" src="../assets/icons/calendar_day.svg" alt="calendar_day" />
-        <img id="month-mode" src="../assets/icons/calendar_week.svg" alt="calendar_week" />
-        <img id="week-mode" src="../assets/icons/calendar_month.svg" alt="calendar_month" />
-        <img id="overdue-mode" src="../assets/icons/notification_important.svg" alt="overdue" />
+        <img id="day-mode" src="../assets/icons/calendar_day.svg" alt="calendar_day"/>
+        <img id="week-mode" src="../assets/icons/calendar_week.svg" alt="calendar_week"/>
+        <img id="month-mode" src="../assets/icons/calendar_month.svg" alt="calendar_month"/>
+        <img id="overdue-mode" src="../assets/icons/notification_important.svg" alt="overdue"/>
 
         <hr style="margin-right: 20px;">
         <img id="view-mode" src="../assets/icons/view_list.svg" alt="view_list" />
@@ -30,20 +29,40 @@
     </div>
 
     <div class="nav-container">
-      <button (click)="showForm()">Add</button>
-
-      <div class="form-container" *ngIf="isFormVisible">
-        <app-todo-form *ngIf="isFormVisible" [todoItem]="selectedTodoItem" (saved)="onTodoItemAdded()"
+      <div class="nav-block-wrapper">
+        <button (click)="viewList()">view To Do List</button>
+        <button (click)="showTodoForm()">new To Do</button>
+        <app-todo-form  
+          class="todo-form-container" 
+          *ngIf="isTodoFormVisible"
+          [todoItem]="selectedTodoItem" 
+          (saved)="onTodoItemAdded()"
           (canceled)="onFormCanceled()">
         </app-todo-form>
+        <button (click)="removeTodoItems()">remove All To Does</button>
       </div>
 
-      <button (click)="removeTodoItems()">Remove All</button>
+      <div class="nav-block-wrapper">
+        <button>view Project List</button>
+        <button (click)="showProjectForm()">new Project</button>
+        <app-project-form
+          class="project-form-container"
+          *ngIf="isProjectFormVisible"
+          [project]="selectedProject" 
+          (projectsSaved)="onProjectAdded()"
+          (projectCanceled)="onProjectCanceled()">
+        </app-project-form>
+        <button (click)="removeProjects()">remove All Projects</button>
+      </div>
+      
+      
+      
 
     </div>
 
-
-    <app-todo-selection [filters]="filters"></app-todo-selection>
+    <app-todo-selection 
+      [filters]="filters">
+    </app-todo-selection>
   </div>
 
 
@@ -52,9 +71,18 @@
       <app-todo-filter (filteredTodo)="applyFilters($event)">
       </app-todo-filter>
     </div>
-    <div class="list-container">
 
-      <app-todo-list class="todo-card" [filters]="filters" [searchQuery]="searchQuery" (edit)="editTodoItem($event)">
+    <div class="list-container">
+      <app-project-list
+      class="project-card"
+        (projectEdited)="editProject($event)">
+      </app-project-list>
+
+      <app-todo-list 
+        class="todo-card" 
+        [filters]="filters" 
+        [searchQuery]="searchQuery" 
+        (edit)="editTodoItem($event)">
       </app-todo-list>
     </div>
   </div>

@@ -1,5 +1,5 @@
 // services/mock/mock-todo-months.ts
-export const MONTHS = [
+export const mockMonths = [
     { id: 1, name: 'January', abbreviation: 'Jan' },
     { id: 2, name: 'February', abbreviation: 'Feb' },
     { id: 3, name: 'March', abbreviation: 'Mar' },

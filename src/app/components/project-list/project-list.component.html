@@ -1,0 +1,24 @@
+<!-- components/project-list/project-list.component.html -->
+
+<div class="no-projects-wrapper">
+    <div id="no-projects-text" *ngIf="projects.length <= 0">THERE ARE NO CURRENT PROJECTS</div>
+  </div>
+
+<div class="project-card" *ngFor="let item of projects">
+    <div class="header">
+        <div>{{ item.title | uppercase }}</div>
+    </div>
+    <div class="body">
+        <!-- <div>{{ item.isCompleted ? 'Done' : 'To Do' }}</div> -->
+        <button (click)="onProjectEdit(item)">Edit</button>
+        <button (click)="deleteProjectById(item.id)">Delete</button>
+    </div>
+</div>
+
+<!-- <select id="project-title" name="title" required>
+    <option *ngFor="let item of projects">{{ item.title }}
+        <button (click)="onEdit(item)">Edit</button>
+        <button (click)="deleteProjectById(item.id)">Delete</button>
+    </option>
+    
+</select> -->

@@ -1,7 +1,12 @@
 <!-- components/todo-list/todo-list.component.html -->
+<div class="no-task-wrapper">
+  <div id="no-task-text" *ngIf="todoItems.length <= 0">THERE ARE NO CURRENT TO DOES</div>
+</div>
 
 <div class="todo-card" *ngFor="let item of todoItems">
   <div class="header">
+    <div>project: {{ item.projectId }}</div>
+    <hr>
     <div>{{ item.title | uppercase }}</div>
   </div>
 
@@ -18,5 +23,6 @@
 
     <button (click)="deleteTodoItemById(item.id)">Delete</button>
   </div>
+
 
 </div>

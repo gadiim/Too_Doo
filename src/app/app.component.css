@@ -10,7 +10,7 @@
 
 button {
     margin: 0;
-    flex: 0.5;
+    flex: 1;
     /* background-color: #0c59e7; */
     background-color: var(--main-color-origin-light-mode);
     color:var(--main-text-white-color-origin-light-mode);
@@ -67,19 +67,19 @@ button.active {
     align-items: center;
 }
   
-  .date-popup {
+.date-popup {
     width: auto;
     padding: 0 1px;
     transition: transform 0.2s ease, opacity 0.3s ease;
     opacity: 0;
     transform: translateX(0);
     z-index: 10;
-  }
+}
   
-  .date-popup.show {
+.date-popup.show {
     opacity: 1;
     transform: translateX(-5%);
-  }
+}
   
 #current-date-mode,
 #day-mode,
@@ -106,7 +106,16 @@ button.active {
     display: flex;
     width: 100%;
     /* flex: 1; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
+}
+
+.nav-block-wrapper {
+    display: flex;
+    flex: 0.5;
+    /* border: solid 1px var(--main-border-color-origin-light-mode); */
+    box-shadow: 0 5px 5px var(--main-border-color-origin-light-mode);
+    border-radius: 4px;
+    padding: 5px;
 }
 
 .body-wrapper {
@@ -136,11 +145,12 @@ button.active {
     height: 100%;
     padding: 5px 20px;
     overflow: auto;
-
+    
     /* border: dotted 2px blueviolet; */
 }
 /*  */
-.todo-card {
+.todo-card,
+.project-card {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -151,21 +161,22 @@ button.active {
     /* background-color: coral; */
 }
 /*  */
-.form-container {
+.todo-form-container,
+.project-form-container {
     display: flex;
     position: fixed;
     z-index: 10;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: 50vw;
+    width: 98vw;
     height: auto;
 
-
     padding: 50px;
-    border-radius: 5px;
+    border-radius: 4px;
     box-shadow: 0 0 5px var(--main-shadow-color-origin-light-mode);
 
     background-color: var(--card-font-color-origin-light-mode);
 }
+

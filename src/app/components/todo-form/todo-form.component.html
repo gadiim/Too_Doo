@@ -3,39 +3,42 @@
 <div>
     <div *ngIf="todoItem.id">Edit Too-Doo</div> <!-- Edit -->
     <div *ngIf="!todoItem.id">Add new Too-Doo</div> <!-- Add -->
-    <form (ngSubmit)="onSave()">
+    <form (ngSubmit)="onTodoSave()">
         <div>
+
             <p>
-                <label for="todoItem-title">title:
+                <label for="todoItem-title">Title:
                     <input 
-                    id="todoItem-title" 
-                    [(ngModel)]="todoItem.title" 
-                    name="title" 
-                    type="text" 
-                    maxlength="20" 
-                    placeholder="20 symbs" 
-                    required>
+                        id="todoItem-title" 
+                        [(ngModel)]="todoItem.title" 
+                        name="title" 
+                        type="text" 
+                        maxlength="20" 
+                        placeholder="20 symbols" 
+                        required>
                 </label>
             </p>
             <p>
-                <label for="todoItem-dueDate">date:
+                <label for="todoItem-dueDate">Date:
                     <input 
                         id="todoItem-dueDate" 
                         [(ngModel)]="todoItem.dueDate" 
                         name="dueDate" 
-                        type="datetime-local"
+                        type="datetime-local" 
                         required>
                 </label>
             </p>
             <p>priority:
                 <select 
-                for="todoItem-priority" 
-                [(ngModel)]="todoItem.priority" 
-                name="priority" required>
-                    <option 
-                    *ngFor="let priority of mockPriority" 
-                    [ngValue]="priority.value">{{ priority.value }}
-                </option>
+                    id="todoItem-priority" 
+                    [(ngModel)]="todoItem.priority"
+                    name="priority" 
+                    required>
+                        <option 
+                            *ngFor="let priority of mockPriority" 
+                            [ngValue]="priority.value">
+                            {{ priority.value }}
+                        </option>
                 </select>
             </p>
             <p>
@@ -53,12 +56,22 @@
                 <textarea 
                     id="todoItem-description" 
                     [(ngModel)]="todoItem.description" 
-                    name="description"
-                    type="text"
-                    maxlength="50"
-                    placeholder="50 symbs">
+                    name="description" 
+                    maxlength="50" 
+                    placeholder="50 symbols">
                 </textarea>
             </p>
+            <!-- <p>project:
+                <select 
+                    id="todoItem-project" 
+                    [(ngModel)]="todoItem.projectId" 
+                    name="project">
+                    <option 
+                        *ngFor="let project of projects" 
+                        [value]="project">{{ project }}
+                    </option>
+                </select>
+            </p> -->
             <p># 
                 <select 
                     id="todoItem-tags" 
@@ -72,17 +85,24 @@
                 </select>
             </p>
             <p>
-                <label for="todoItem-isCompleted">mark as done:
+                <label for="todoItem-isCompleted">Mark as done:
                     <input 
                         id="todoItem-isCompleted" 
-                        [(ngModel)]="todoItem.isCompleted"
-                        name="isCompleted"
+                        [(ngModel)]="todoItem.isCompleted" 
+                        name="isCompleted" 
                         type="checkbox">
                 </label>
             </p>
+            <!-- <p>
+                <label for="todoItem-project">project: 
+                    <select id="project" [(ngModel)]="todoItem.project">
+                        <option *ngFor="let project of projects" [value]="project">{{ project }}</option>
+                    </select>
+                </label>
+            </p> -->
         </div>
 
-        <button type="button" (click)="onCancel()">Cancel</button>
-        <button type="submit" (click)="onCancel()">Apply</button>    <!-- button calls onSave() -->
+        <button type="button" (click)="onTodoCancel()">Cancel</button>
+        <button type="submit" (click)="onTodoCancel()">Apply</button>
     </form>
 </div>

@@ -1,7 +1,7 @@
 // services/todo-form.service.ts
 import { Injectable } from '@angular/core';
 import { TodoListService } from './todo-list.service';
-import { TodoItem } from '../models/todoItem.model';
+import { TodoItem } from '../models/item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,11 @@ export class TodoFormService {
       todoItem.id = maxId + 1;
     }
     this.todoListService.addTodoItem(todoItem);
+  }
+
+  updateTodoItem(todoItem: TodoItem): void {
+    if (todoItem.id) {
+      this.todoListService.updateTodoItemById(todoItem);
+    }
   }
 }

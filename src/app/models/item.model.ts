@@ -1,4 +1,4 @@
-// models/todoItem.model.ts
+// models/item.model.ts
 export class TodoItem {
     id: number = 0;
     title: string = '';
@@ -7,6 +7,7 @@ export class TodoItem {
     tag: string = '';
     priority: string = '';
     projectId?: number;
+    // project: string = '';
     isCompleted: boolean = false;
     
     constructor(
@@ -17,6 +18,7 @@ export class TodoItem {
         tag: string,
         priority: string,
         projectId: number,
+        // project: string,
         isCompleted: boolean,
         ) {
         this.id = id;
@@ -26,6 +28,7 @@ export class TodoItem {
         this.tag = tag;
         this.priority = priority;
         this.projectId = projectId;
+        // this.project = project;
         this.isCompleted = isCompleted;
         
     };

@@ -1,0 +1,19 @@
+<!-- components/project-form/project-form.component.html -->
+<div>
+  <div *ngIf="project.id">Edit Project</div> <!-- Edit -->
+  <div *ngIf="!project.id">Add new Project</div> <!-- Add -->
+  <form (ngSubmit)="onProjectSave()">
+    <label for="todoItem-title">Title:
+      <input 
+        id="todoItem-title" 
+        [(ngModel)]="project.title" 
+        name="title" 
+        type="text" 
+        maxlength="20"
+        placeholder="20 symbols" 
+        required>
+    </label>
+    <button type="button" (click)="onProjectCancel()">Cancel</button>
+    <button type="submit" (click)="onProjectCancel()">Apply</button>
+  </form>
+</div>

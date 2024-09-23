@@ -19,9 +19,9 @@ button:hover {
     opacity: 0.7;
 }
 
-.todo-card {
+.project-card {
     display: block;
-    height: 300px;
+    height: 150px;
     flex-basis: calc(33.33% - 10px);
     margin: 5px;
     background-color: var(--card-font-color-origin-light-mode);
@@ -29,15 +29,15 @@ button:hover {
     text-wrap: balance;
 }
 
-.todo-card:hover {
+.project-card:hover {
     box-shadow: 0 0 5px var(--main-shadow-color-origin-light-mode);
 }
 
-.todo-card.hidden {
+.project-card.hidden {
     display: none;
 }
 
-.todo-card .header {
+.project-card .header {
     background-color: var(--main-color-origin-light-mode);
     color: var(--main-text-white-color-origin-light-mode);
     border-radius: 4px 4px 0 0;
@@ -47,23 +47,15 @@ button:hover {
     text-align: center;
 }
 
-.todo-card .body {
+.project-card .body {
     padding: 30px;
 }
-.todo-card .body table tbody tr td:first-of-type {
-    color: grey;
-    text-align: left;
-}
-.todo-card .body table tbody tr td:last-of-type {
-    color: var(--main-color-origin-light-mode);
-    text-align: right;
-}
 
-.no-task-wrapper {
+.no-projects-wrapper {
     width: 100%;
 }
 
-#no-task-text {
+#no-projects-text {
     margin-left: 40%;
     color: var(--main-shadow-color-origin-light-mode);
     font-weight: 600;

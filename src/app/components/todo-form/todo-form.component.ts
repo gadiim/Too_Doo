@@ -1,10 +1,9 @@
 // components/todo-form/todo-form.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor, UpperCasePipe } from '@angular/common';
-import { DatePipe } from '@angular/common';
-import { TodoItem } from '../../models/todoItem.model';
-import { TodoListService } from '../../services/todo-list.service';
+import { NgIf, NgFor, UpperCasePipe, DatePipe } from '@angular/common';
+import { TodoItem } from '../../models/item.model';
+import { TodoFormService } from '../../services/todo-form.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
 
@@ -16,37 +15,38 @@ import { mockPriority } from '../../services/mock/mock-todo-priority';
   styleUrls: ['./todo-form.component.css']
 })
 export class TodoFormComponent {
-  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', '', '', 0, false);
-  @Output() todoAdded = new EventEmitter<void>(); // Додаємо EventEmitter для сповіщення про додавання елемента
-  @Output() canceled = new EventEmitter<void>(); // Подія для інформування батьківського компонента
+  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
+  @Output() todoAdded = new EventEmitter<void>();
+  @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
-  
-  mockTags = mockTags;            // Додаємо mockTags до компонента
-  mockPriority = mockPriority;    // Додаємо mockRatings до компонента
 
-  constructor(private todoListService: TodoListService) { }
+  mockTags = mockTags;
+  mockPriority = mockPriority;
 
-  onSave(): void {
-    if (!this.todoItem.id) {
-      const maxId = Math.max(...this.todoListService.getTodoItems().map(t => t.id), 0);
-      this.todoItem.id = maxId + 1;
-      this.todoListService.addTodoItem(this.todoItem);
-      this.todoAdded.emit(); // Сповіщення про додавання нового завдання
+  constructor(
+    private todoFormService: TodoFormService,
+  ) { }
+
+  onTodoSave(): void {
+    if (!this.todoItem.title) {
+      alert('Please select a title!');
+      return;
     }
-   else {
-    // Updating existing item
-    this.todoListService.updateTodoItemById(this.todoItem);
-  }
-    this.closeForm(); // Закриває форму після збереження
-    
+
+    if (!this.todoItem.id) {
+      this.todoFormService.saveTodoItem(this.todoItem);
+    } else {
+      this.todoFormService.updateTodoItem(this.todoItem);
+    }
+    this.todoAdded.emit();          // Сповіщення про додавання/оновлення завдання 
   }
 
-  onCancel(): void {
-    this.canceled.emit(); // Викидаємо подію для батьківського компонента
-    this.closeForm(); // Закриває форму після скасування
+  onTodoCancel(): void {
+    this.canceled.emit();
+    this.closeTodoForm();
   }
 
-  closeForm(): void {
-    this.closed.emit(); // Викидаємо подію для батьківського компонента
+  closeTodoForm(): void {
+    this.closed.emit();
   }
 }

@@ -6,7 +6,7 @@ button {
     background-color: #0c59e7;
     color: white;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 button:hover {
@@ -63,6 +63,13 @@ button.active {
     padding: 5px 30px;
 }
 
+.project-button-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px 25px;
+}
+
 .tag-button-container {
     display: flex;
     flex-direction: row;
@@ -70,7 +77,9 @@ button.active {
     padding: 10px 25px;
 }
 
-.tag-button-wrapper {}
+.tag-button-wrapper {
+    
+}
 
 .tag-button-container button {
     padding: 5px 10px;

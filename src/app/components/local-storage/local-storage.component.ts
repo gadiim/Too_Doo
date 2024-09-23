@@ -12,18 +12,14 @@ export class LocalStorageComponent {
 
   constructor(private localStorageService: LocalStorageService) {}
 
-  // Приклад: додавання значення в LocalStorage
   addItemToLocalStorage(): void {
     this.localStorageService.setItem('myKey', {name: 'Example', value: 100});
   }
 
-  // Приклад: отримання значення з LocalStorage
   getItemFromLocalStorage(): void {
     const data = this.localStorageService.getItem('myKey');
-    console.log('Data from LocalStorage:', data);
   }
 
-  // Приклад: очищення LocalStorage
   clearLocalStorage(): void {
     this.localStorageService.clear();
   }

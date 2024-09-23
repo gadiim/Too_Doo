@@ -1,5 +1,5 @@
 // services/mock/mock-todo-days.ts
-export const DAYS = [
+export const mockDays = [
     { id: 1, name: '', ordinal: 'first', ordinalNumber: '1st' },
     { id: 2, name: '', ordinal: 'second', ordinalNumber: '2nd' },
     { id: 3, name: '', ordinal: 'third', ordinalNumber: '3rd' },

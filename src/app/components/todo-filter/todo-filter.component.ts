@@ -2,13 +2,16 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf, NgFor, UpperCasePipe, DatePipe } from '@angular/common';
-import { TodoItem } from '../../models/todoItem.model';
+import { TodoItem } from '../../models/item.model';
+import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
+import { TodoFilterService } from '../../services/todo-filter.service';
 import { TodoListService } from '../../services/todo-list.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
-import { DAYS } from '../../services/mock/mock-days';
-import { MONTHS } from '../../services/mock/mock-months';
-import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
+import { mockDays } from '../../services/mock/mock-days';
+import { mockMonths } from '../../services/mock/mock-months';
+
+
 
 @Component({
   selector: 'app-todo-filter',
@@ -27,13 +30,16 @@ export class TodoFilterComponent {
   @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
-  days = DAYS;
-  months = MONTHS;
+  days = mockDays;
+  months = mockMonths;
   mockPriority = mockPriority;
   mockTags = mockTags;
 
   selectedIsCompleted: boolean | null = null;
   isIsCompletedContainerVisible = false;
+
+  selectedProject: number = 0;
+  isProjectContainerVisible = false;
 
   // selectedDay: number = 0;
   selectedDays: number[] = []; // !!!
@@ -48,7 +54,10 @@ export class TodoFilterComponent {
   selectedTag: string = '';
   isTagContainerVisible = false;
 
-  constructor(private todoListService: TodoListService) { }
+  constructor(
+    private todoListService: TodoListService,
+    private todoFilterService: TodoFilterService
+  ) { }
 
   ngOnInit(): void {
     this.todoItems = this.todoListService.getTodoItems();
@@ -56,10 +65,10 @@ export class TodoFilterComponent {
   }
 // // // // // // // // // // // // // // // // // //
 // // IsCompleted
-  highlightIsCompleted(todoIsCompleted: boolean) {
-    this.selectedIsCompleted = todoIsCompleted;
-    this.onFilterChange();
-  }
+highlightIsCompleted(todoIsCompleted: boolean) {
+  this.selectedIsCompleted = todoIsCompleted;
+  this.onFilterChange();
+}
 
   toggleIsCompletedContainer() {
     this.isIsCompletedContainerVisible = !this.isIsCompletedContainerVisible;
@@ -69,6 +78,21 @@ export class TodoFilterComponent {
     this.selectedIsCompleted = null;//null
     this.onFilterChange();
   }
+  // // // // // // // // // // // // // // // // // //
+// // Project
+highlightProject(todoProject: number) {
+  this.selectedProject = todoProject;
+  this.onFilterChange();
+}
+
+toggleProjectContainer() {
+  this.isProjectContainerVisible = !this.isProjectContainerVisible;
+}
+
+clearProject() {
+  this.selectedProject = 0;
+  this.onFilterChange();
+}
 // // // // // // // // // // // // // // // // // //
 // // Day
 toggleDayContainer() {
@@ -159,15 +183,19 @@ clearDay() {
     onFilterChange(): void {
       this.filteredTodo.emit({
         isCompleted: this.selectedIsCompleted,
+        project: this.selectedProject,
         days: this.selectedDays, // Відправляємо масив днів
         months: this.selectedMonth,
         priority: this.selectedPriority,
-        tag: this.selectedTag
+        tag: this.selectedTag,
+        isToday: false
+
       });
     }
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
+    this.selectedProject = 0;
     this.selectedDays = [];
     this.selectedMonth = 0;
     this.selectedPriority = '';

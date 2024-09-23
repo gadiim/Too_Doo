@@ -7,6 +7,7 @@
             class="clear-button"
             [ngClass]="{'active': 
             selectedIsCompleted === null && 
+            selectedProject === 0 &&
             selectedPriority === '' && 
             selectedTag === '' &&
             selectedDays.length === 0 && 
@@ -50,6 +51,40 @@
             </button>
         </div>
     </div>
+<!-- /////////////// -->
+<!-- Project -->
+
+    <!-- <div (click)="toggleProjectContainer()" class="toggle-container">
+        Project
+        <ng-container *ngIf="isProjectContainerVisible; else showIconTag">
+            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+        </ng-container>
+        <ng-template #showIconTag>
+            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+        </ng-template>
+    </div>
+    
+    <div *ngIf="isProjectContainerVisible" class="project-button-container">
+        <div class="project-button-wrapper" *ngFor="let item of todoItems">
+            <button 
+                [ngClass]="{'active': selectedProject === item.project}"
+                (click)="highlightProject(item.project)"
+                [ngStyle]="{ 'display': item.project ? 'block' : 'none' }">
+                {{ projectId }}
+            </button>
+        </div>
+        <div class="clear-button-wrapper">
+            <button 
+                class="clear-button"
+                [ngClass]="{'active': selectedProject === ''}" 
+                (click)="clearProject()">
+                Clear
+            </button>
+        </div>
+    </div> -->
+
+<!-- /////////////// -->
+<!-- Priority -->
 
     <div (click)="togglePriorityContainer()" class="toggle-container">
         Priority
