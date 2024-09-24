@@ -78,7 +78,7 @@ export class AppComponent {
 
   showTodoForm(): void {
     this.isTodoFormVisible = true;
-    this.selectedTodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false); // Для створення нової задачі
+    this.selectedTodoItem = new TodoItem(0, '', new Date(), '', '', '', '', false); // Для створення нової задачі
   }
 
   // closeTodoForm(): void {

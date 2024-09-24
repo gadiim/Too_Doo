@@ -18,7 +18,7 @@
 
 export interface TodoFilter {
     isCompleted: boolean | null;
-    project: number;
+    project: string;
     days: number[]; // змінено з day на масив days
     months: number;
     priority: string;
@@ -28,7 +28,7 @@ export interface TodoFilter {
 
 export const defaultTodoFilter: TodoFilter = {
     isCompleted: null,
-    project: 0,
+    project: '',
     days: [], // array вибраних днів
     months: 0,
     priority: '',

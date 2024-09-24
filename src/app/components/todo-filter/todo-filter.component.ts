@@ -38,7 +38,7 @@ export class TodoFilterComponent {
   selectedIsCompleted: boolean | null = null;
   isIsCompletedContainerVisible = false;
 
-  selectedProject: number = 0;
+  selectedProject: string = '';
   isProjectContainerVisible = false;
 
   // selectedDay: number = 0;
@@ -80,7 +80,7 @@ highlightIsCompleted(todoIsCompleted: boolean) {
   }
   // // // // // // // // // // // // // // // // // //
 // // Project
-highlightProject(todoProject: number) {
+highlightProject(todoProject: string) {
   this.selectedProject = todoProject;
   this.onFilterChange();
 }
@@ -90,7 +90,7 @@ toggleProjectContainer() {
 }
 
 clearProject() {
-  this.selectedProject = 0;
+  this.selectedProject = '';
   this.onFilterChange();
 }
 // // // // // // // // // // // // // // // // // //
@@ -195,7 +195,7 @@ clearDay() {
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
-    this.selectedProject = 0;
+    this.selectedProject = '';
     this.selectedDays = [];
     this.selectedMonth = 0;
     this.selectedPriority = '';

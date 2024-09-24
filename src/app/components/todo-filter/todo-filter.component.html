@@ -7,7 +7,7 @@
             class="clear-button"
             [ngClass]="{'active': 
             selectedIsCompleted === null && 
-            selectedProject === 0 &&
+            selectedProject === '' &&
             selectedPriority === '' && 
             selectedTag === '' &&
             selectedDays.length === 0 && 
@@ -54,7 +54,7 @@
 <!-- /////////////// -->
 <!-- Project -->
 
-    <!-- <div (click)="toggleProjectContainer()" class="toggle-container">
+    <div (click)="toggleProjectContainer()" class="toggle-container">
         Project
         <ng-container *ngIf="isProjectContainerVisible; else showIconTag">
             <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
@@ -70,7 +70,7 @@
                 [ngClass]="{'active': selectedProject === item.project}"
                 (click)="highlightProject(item.project)"
                 [ngStyle]="{ 'display': item.project ? 'block' : 'none' }">
-                {{ projectId }}
+                {{ item.project }}
             </button>
         </div>
         <div class="clear-button-wrapper">
@@ -81,7 +81,7 @@
                 Clear
             </button>
         </div>
-    </div> -->
+    </div>
 
 <!-- /////////////// -->
 <!-- Priority -->

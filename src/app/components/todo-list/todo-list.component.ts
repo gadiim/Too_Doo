@@ -1,25 +1,27 @@
 // components/todo-list/todo-list.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule, NgForOf, DatePipe } from '@angular/common';
+import { CommonModule, NgForOf, DatePipe, NgIf, NgFor } from '@angular/common';
 import { TodoItem } from '../../models/item.model';
 import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
 import { TodoListService } from '../../services/todo-list.service';
-import { ProjectListService } from '../../services/project-list.service'; // Імпорт сервісу для проектів
 import { mockPriority } from '../../services/mock/mock-todo-priority';
 import { TodoFilterComponent } from '../todo-filter/todo-filter.component';
 import { TodoSearchComponent } from '../todo-search/todo-search.component';
+import { Project } from '../../models/project.model';
+import { ProjectListService } from '../../services/project-list.service'; 
 
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, NgForOf, DatePipe, TodoFilterComponent, TodoSearchComponent],
+  imports: [CommonModule, NgIf, NgFor, NgForOf, DatePipe, TodoFilterComponent, TodoSearchComponent],
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent {
 
   todoItems: TodoItem[] = [];
+  projects: Project[] = [];
 
   @Input() filters: TodoFilter = { ...defaultTodoFilter };
   @Output() edit = new EventEmitter<TodoItem>();
@@ -28,8 +30,13 @@ export class TodoListComponent {
   mockPriority = mockPriority;
 
   constructor(
-    private todoListService: TodoListService
-  ) { }
+    private todoListService: TodoListService,
+    private projectListService: ProjectListService
+  )
+  {  
+    // this.projects = this.projectListService.getProjects()
+  }
+
 
   ngOnInit(): void {   //список завдань з mock або LocalStorage при ініціалізації
     this.getTodoItems(); 
@@ -81,6 +88,10 @@ export class TodoListComponent {
       });
     }
 
+    if (this.filters.project) {
+      filteredItems = filteredItems.filter(item => item.project === this.filters.project);
+    }
+    
     if (this.filters.priority) {
       filteredItems = filteredItems.filter(item => item.priority === this.filters.priority);
     }

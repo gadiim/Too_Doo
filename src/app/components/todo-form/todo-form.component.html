@@ -41,17 +41,7 @@
                         </option>
                 </select>
             </p>
-            <p>
-                <!-- <label for="todoItem-description">description:
-                    <input 
-                        id="todoItem-description" 
-                        [(ngModel)]="todoItem.description" 
-                        name="description" 
-                        type="text"
-                        maxlength="50"
-                        placeholder="50 symbs">
-                </label>
-            </p> -->
+
             <p>description: 
                 <textarea 
                     id="todoItem-description" 
@@ -61,17 +51,17 @@
                     placeholder="50 symbols">
                 </textarea>
             </p>
-            <!-- <p>project:
+            <p>project:
                 <select 
                     id="todoItem-project" 
-                    [(ngModel)]="todoItem.projectId" 
+                    [(ngModel)]="todoItem.project" 
                     name="project">
                     <option 
                         *ngFor="let project of projects" 
-                        [value]="project">{{ project }}
+                        >{{ project.title}}
                     </option>
                 </select>
-            </p> -->
+            </p>
             <p># 
                 <select 
                     id="todoItem-tags" 

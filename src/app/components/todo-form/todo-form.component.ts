@@ -6,6 +6,9 @@ import { TodoItem } from '../../models/item.model';
 import { TodoFormService } from '../../services/todo-form.service';
 import { mockTags } from '../../services/mock/mock-todo-tags';
 import { mockPriority } from '../../services/mock/mock-todo-priority';
+import { Project } from '../../models/project.model';
+import { ProjectListService } from '../../services/project-list.service'; 
+
 
 @Component({
   selector: 'app-todo-form',
@@ -15,17 +18,22 @@ import { mockPriority } from '../../services/mock/mock-todo-priority';
   styleUrls: ['./todo-form.component.css']
 })
 export class TodoFormComponent {
-  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
+  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', '', false);
   @Output() todoAdded = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();
 
   mockTags = mockTags;
   mockPriority = mockPriority;
+  projects: Project[] = [];
 
   constructor(
     private todoFormService: TodoFormService,
-  ) { }
+    private projectListService: ProjectListService
+  ) 
+  {  
+    this.projects = this.projectListService.getProjects()
+  }
 
   onTodoSave(): void {
     if (!this.todoItem.title) {
