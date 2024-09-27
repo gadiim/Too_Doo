@@ -13,7 +13,7 @@ button {
     flex: 1;
     /* background-color: #0c59e7; */
     background-color: var(--main-color-origin-light-mode);
-    color:var(--main-text-white-color-origin-light-mode);
+    color: var(--main-text-white-color-origin-light-mode);
 }
 
 button:hover {
@@ -21,9 +21,9 @@ button:hover {
 }
 
 button.active {
-    background-color: var(--main-shadow-color-origin-light-mode);
+    background-color: var(--secondary-color-origin-light-mode);
     /* background-color: var(--main-shadow-color); */
-    color: var(--main-text-white-color-origin-light-mode);
+    color: var(--secondary-text-blue-color-origin-light-mode);
 }
 
 .app-container {
@@ -105,15 +105,12 @@ button.active {
 .nav-container {
     display: flex;
     width: 100%;
-    /* flex: 1; */
-    /* justify-content: space-between; */
+    box-shadow: 0 5px 5px var(--main-border-color-origin-light-mode);
 }
 
 .nav-block-wrapper {
     display: flex;
     flex: 0.5;
-    /* border: solid 1px var(--main-border-color-origin-light-mode); */
-    box-shadow: 0 5px 5px var(--main-border-color-origin-light-mode);
     border-radius: 4px;
     padding: 5px;
 }

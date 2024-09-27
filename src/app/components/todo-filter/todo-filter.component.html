@@ -16,10 +16,45 @@
             Clear all Filters
         </button>
     </div>
+<!-- Project -->
 
+<div (click)="toggleProjectContainer()" class="toggle-container">
+    Project
+    <ng-container *ngIf="isProjectContainerVisible; else showIconTag">
+        <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
+    </ng-container>
+    <ng-template #showIconTag>
+        <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
+    </ng-template>
+</div>
 
+<div *ngIf="isProjectContainerVisible" class="project-button-container">
+    <div class="project-button-wrapper" *ngFor="let item of todoItems" >
+        <button 
+        (click)="highlightProject(item.id)"
+        [ngClass]="{ 'active': selectedProject == item.projectId }"               
+        [ngStyle]="{ 'display': item.projectId ? 'block' : 'none' }">
+        <div *ngFor="let project of projects">
+            <ng-container *ngIf="item.projectId == project.id">
+              {{ project.title }}
+            </ng-container>
+          </div>
+    </button>
+    </div>
+    <div class="clear-button-wrapper">
+        <button 
+            class="clear-button"
+            [ngClass]="{'active': selectedProject === 0}" 
+            (click)="clearProject()">
+            Clear
+        </button>
+    </div>
+</div>
+
+<!-- /////////////// -->
+<!-- IsCompleted-->
     <div (click)="toggleIsCompletedContainer()" class="toggle-container">
-        isCompleted
+        Status
         <ng-container *ngIf="isIsCompletedContainerVisible; else showIconTag">
             <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
         </ng-container>
@@ -51,43 +86,6 @@
             </button>
         </div>
     </div>
-<!-- /////////////// -->
-<!-- Project -->
-
-    <div (click)="toggleProjectContainer()" class="toggle-container">
-        Project
-        <ng-container *ngIf="isProjectContainerVisible; else showIconTag">
-            <img src="../../../assets/icons/keyboard_arrow_up.svg" alt="keyboard_arrow_up" />
-        </ng-container>
-        <ng-template #showIconTag>
-            <img src="../../../assets/icons/keyboard_arrow_down.svg" alt="keyboard_arrow_down" />
-        </ng-template>
-    </div>
-    
-    <div *ngIf="isProjectContainerVisible" class="project-button-container">
-        <div class="project-button-wrapper" *ngFor="let item of todoItems" >
-            <button 
-            (click)="highlightProject(item.id)"
-            [ngClass]="{ 'active': selectedProject == item.projectId }"               
-            [ngStyle]="{ 'display': item.projectId ? 'block' : 'none' }">
-            <div *ngFor="let project of projects">
-                <ng-container *ngIf="item.projectId == project.id">
-                  {{ project.title }}
-                </ng-container>
-              </div>
-            <!-- {{ item.projectId }} -->
-        </button>
-        </div>
-        <div class="clear-button-wrapper">
-            <button 
-                class="clear-button"
-                [ngClass]="{'active': selectedProject === 0}" 
-                (click)="clearProject()">
-                Clear
-            </button>
-        </div>
-    </div>
-
 <!-- /////////////// -->
 <!-- Priority -->
 

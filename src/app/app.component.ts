@@ -64,10 +64,24 @@ export class AppComponent {
     this.searchQuery = searchText;
   }
 
-  viewList():void {
-    this.filters = { ...defaultTodoFilter };
-  }
+  isTodoListVisible: boolean = false;
+  isProjectListVisible: boolean = true;
 
+  viewList(): void {
+    this.isTodoListVisible = true;
+    this.isProjectListVisible = false;
+  };
+
+  viewProjects(): void {
+    this.isTodoListVisible = false;
+    this.isProjectListVisible = true;
+  };
+
+  isActiveList(type: 'todo' | 'project'): boolean {
+    return type === 'todo' ? this.isTodoListVisible : this.isProjectListVisible;
+  };
+
+  //////////////////////////////////////
   toggleTodoFormVisibility(): void {
     this.isTodoFormVisible = !this.isTodoFormVisible;
   }
@@ -138,10 +152,19 @@ export class AppComponent {
   }
 
   removeProjects(): void {
-    this.projectListService.clearAllProjects();
-    // this.filters = { ...defaultTodoFilter };  // Використання дефолтних значень фільтра
-    this.selectedProject = null;  // Скидання вибраного елементу
-  }
+    const confirmation = confirm("Are you sure you want to delete all projects and their associated tasks?");
+
+    if (confirmation) {
+      const todoItems = this.todoListService.getTodoItems();
+      const itemsToDelete = todoItems.filter(item => item.projectId > 0);
+      itemsToDelete.forEach(item => {
+        console.log(`Deleting todo item with id: ${item.id}`);
+        this.todoListService.deleteTodoItemById(item.id);
+      });
+      this.projectListService.clearAllProjects();
+      this.selectedProject = null;
+    }
+  };
 
   ////////////////////////
 

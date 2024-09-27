@@ -26,8 +26,8 @@ export class TodoFilterComponent {
 
   todoItems: TodoItem[] = [];
   projects: Project[] = [];
+  shownProjects: number[] = []; // доробити
 
-  // @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', [], '', 0, false);
   @Output() filteredTodo = new EventEmitter<TodoFilter>();
   @Output() todoAdded = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();

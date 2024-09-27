@@ -6,7 +6,7 @@ export class TodoItem {
     description: string = '';
     tag: string = '';
     priority: string = '';
-    projectId?: number;
+    projectId: number; // projectId?: number;
     // project: string = '';
     isCompleted: boolean = false;
     

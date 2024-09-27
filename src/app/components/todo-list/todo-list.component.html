@@ -5,21 +5,22 @@
 
 <div class="todo-card" *ngFor="let item of todoItems">
   <div class="header">
-    <div *ngFor="let project of projects">
+
+    <div>{{ item.title | uppercase }}</div>
+  </div>
+
+  <div class="body">
+    <div *ngFor="let project of projects"> 
       <ng-container *ngIf="item.projectId == project.id">
         project: {{ project.title }}
       </ng-container>
     </div>
     <hr>
-    <div>{{ item.title | uppercase }}</div>
-  </div>
-
-  <div class="body">
     <div>date: {{ item.dueDate | date:'longDate' }}</div> <!-- date:'fullDate' -->
     <div>day: {{ item.dueDate | date:'EEEE' }}</div> <!-- date:'short' -->
     <div>time: {{ item.dueDate | date:'shortTime' }}</div> <!-- date:'longDate' -->
     <div>description: {{ item.description }}</div>
-    <div>tag: #{{ item.tag }}</div>
+    <div>tag: #{{ item.tag}}</div>
     <!-- <div>tags #{{ item.tags.join(', #') }}</div> -->
     <div>priority: {{ item.priority}}</div>
     <div>{{ item.isCompleted ? 'Done' : 'To Do' }}</div>

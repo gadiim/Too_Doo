@@ -6,12 +6,12 @@
 
 <div class="project-card" *ngFor="let item of projects">
     <div class="header">
-        <div>{{ item.title | uppercase }}</div>
+        <div>{{ item.title }}</div>
     </div>
     <div class="body">
         <!-- <div>{{ item.isCompleted ? 'Done' : 'To Do' }}</div> -->
         <button (click)="onProjectEdit(item)">Edit</button>
-        <button (click)="deleteProjectById(item.id)">Delete</button>
+        <button (click)="confirmDelete(item.id)">Delete</button>
     </div>
 </div>
 

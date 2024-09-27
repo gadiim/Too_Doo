@@ -33,9 +33,7 @@ export class TodoListComponent {
     private todoListService: TodoListService,
     private projectListService: ProjectListService
   )
-  {  
-    // this.projects = this.projectListService.getProjects()
-  }
+  {}
 
 
   ngOnInit(): void {   //список завдань з mock або LocalStorage при ініціалізації
@@ -131,6 +129,11 @@ export class TodoListComponent {
     this.todoListService.deleteTodoItemById(id); // видалення елемента
     this.getTodoItems(); // оновлення todo-list після видалення елемента
   }
+
+  // deleteTodoItemByProjectId(projectId: number): void {
+  //   this.todoListService.deleteTodoItemById(projectId);
+  //   this.getTodoItems(); // оновлення todo-list після видалення елемента
+  // }
 
   // updateTodoItemById(updatedTodoItem: TodoItem): void {
   //   this.todoListService.updateTodoItemById(updatedTodoItem); // оновлення елемента

@@ -30,34 +30,22 @@
 
     <div class="nav-container">
       <div class="nav-block-wrapper">
-        <button (click)="viewList()">view To Do List</button>
+        <button (click)="viewList()" [ngClass]="{'active': isActiveList('todo')}">view To Do List</button>
         <button (click)="showTodoForm()">new To Do</button>
-        <app-todo-form  
-          class="todo-form-container" 
-          *ngIf="isTodoFormVisible"
-          [todoItem]="selectedTodoItem" 
-          (saved)="onTodoItemAdded()"
-          (canceled)="onFormCanceled()">
+        <app-todo-form class="todo-form-container" *ngIf="isTodoFormVisible" [todoItem]="selectedTodoItem"
+          (saved)="onTodoItemAdded()" (canceled)="onFormCanceled()">
         </app-todo-form>
         <button (click)="removeTodoItems()">remove All To Does</button>
       </div>
-
+    
       <div class="nav-block-wrapper">
-        <button>view Project List</button>
+        <button (click)="viewProjects()" [ngClass]="{'active': isActiveList('project')}">view Project List</button>
         <button (click)="showProjectForm()">new Project</button>
-        <app-project-form
-          class="project-form-container"
-          *ngIf="isProjectFormVisible"
-          [project]="selectedProject" 
-          (projectsSaved)="onProjectAdded()"
-          (projectCanceled)="onProjectCanceled()">
+        <app-project-form class="project-form-container" *ngIf="isProjectFormVisible" [project]="selectedProject"
+          (projectsSaved)="onProjectAdded()" (projectCanceled)="onProjectCanceled()">
         </app-project-form>
         <button (click)="removeProjects()">remove All Projects</button>
       </div>
-      
-      
-      
-
     </div>
 
     <app-todo-selection 
@@ -74,12 +62,14 @@
 
     <div class="list-container">
       <app-project-list
-      class="project-card"
+        *ngIf="isProjectListVisible"
+        class="project-card"
         (projectEdited)="editProject($event)">
       </app-project-list>
 
       <app-todo-list 
-        class="todo-card" 
+        *ngIf="isTodoListVisible"
+        class="todo-card"
         [filters]="filters" 
         [searchQuery]="searchQuery" 
         (edit)="editTodoItem($event)">
