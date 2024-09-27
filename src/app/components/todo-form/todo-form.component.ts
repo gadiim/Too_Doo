@@ -18,7 +18,7 @@ import { ProjectListService } from '../../services/project-list.service';
   styleUrls: ['./todo-form.component.css']
 })
 export class TodoFormComponent {
-  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', '', false);
+  @Input() todoItem: TodoItem = new TodoItem(0, '', new Date(), '', '', '', 0, false);
   @Output() todoAdded = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();
   @Output() closed = new EventEmitter<void>();

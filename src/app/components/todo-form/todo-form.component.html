@@ -54,11 +54,12 @@
             <p>project:
                 <select 
                     id="todoItem-project" 
-                    [(ngModel)]="todoItem.project" 
+                    [(ngModel)]="todoItem.projectId" 
                     name="project">
                     <option 
                         *ngFor="let project of projects" 
-                        >{{ project.title}}
+                        [value]="project.id">
+                        {{ project.title }}
                     </option>
                 </select>
             </p>

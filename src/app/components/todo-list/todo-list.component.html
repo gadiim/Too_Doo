@@ -5,7 +5,11 @@
 
 <div class="todo-card" *ngFor="let item of todoItems">
   <div class="header">
-    <div>project: {{ item.project }}</div>
+    <div *ngFor="let project of projects">
+      <ng-container *ngIf="item.projectId == project.id">
+        project: {{ project.title }}
+      </ng-container>
+    </div>
     <hr>
     <div>{{ item.title | uppercase }}</div>
   </div>

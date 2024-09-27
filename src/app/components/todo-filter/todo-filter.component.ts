@@ -3,6 +3,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf, NgFor, UpperCasePipe, DatePipe } from '@angular/common';
 import { TodoItem } from '../../models/item.model';
+import { Project } from '../../models/project.model';
+import { ProjectListService } from '../../services/project-list.service'; 
 import { TodoFilter, defaultTodoFilter } from '../../models/filter.model';
 import { TodoFilterService } from '../../services/todo-filter.service';
 import { TodoListService } from '../../services/todo-list.service';
@@ -23,6 +25,7 @@ import { mockMonths } from '../../services/mock/mock-months';
 export class TodoFilterComponent {
 
   todoItems: TodoItem[] = [];
+  projects: Project[] = [];
 
   // @Input() todoItem: TodoItem = new TodoItem(0, '', new Date, '', [], '', 0, false);
   @Output() filteredTodo = new EventEmitter<TodoFilter>();
@@ -38,7 +41,7 @@ export class TodoFilterComponent {
   selectedIsCompleted: boolean | null = null;
   isIsCompletedContainerVisible = false;
 
-  selectedProject: string = '';
+  selectedProject: number = 0;
   isProjectContainerVisible = false;
 
   // selectedDay: number = 0;
@@ -56,11 +59,13 @@ export class TodoFilterComponent {
 
   constructor(
     private todoListService: TodoListService,
-    private todoFilterService: TodoFilterService
+    private todoFilterService: TodoFilterService,
+    private projectListService: ProjectListService,
   ) { }
 
   ngOnInit(): void {
     this.todoItems = this.todoListService.getTodoItems();
+    this.projects = this.projectListService.getProjects();
     this.onFilterChange();
   }
 // // // // // // // // // // // // // // // // // //
@@ -80,17 +85,17 @@ highlightIsCompleted(todoIsCompleted: boolean) {
   }
   // // // // // // // // // // // // // // // // // //
 // // Project
-highlightProject(todoProject: string) {
+highlightProject(todoProject: number) {
   this.selectedProject = todoProject;
   this.onFilterChange();
 }
-
+ 
 toggleProjectContainer() {
   this.isProjectContainerVisible = !this.isProjectContainerVisible;
 }
 
 clearProject() {
-  this.selectedProject = '';
+  this.selectedProject = 0;
   this.onFilterChange();
 }
 // // // // // // // // // // // // // // // // // //
@@ -195,7 +200,7 @@ clearDay() {
 
   clearFilters(): void {
     this.selectedIsCompleted = null;
-    this.selectedProject = '';
+    this.selectedProject = 0;
     this.selectedDays = [];
     this.selectedMonth = 0;
     this.selectedPriority = '';

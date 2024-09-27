@@ -6,8 +6,8 @@ export class TodoItem {
     description: string = '';
     tag: string = '';
     priority: string = '';
-    // projectId?: number;
-    project: string = '';
+    projectId?: number;
+    // project: string = '';
     isCompleted: boolean = false;
     
     constructor(
@@ -17,8 +17,8 @@ export class TodoItem {
         description: string,
         tag: string,
         priority: string,
-        // projectId: number,
-        project: string,
+        projectId: number,
+        // project: string,
         isCompleted: boolean,
         ) {
         this.id = id;
@@ -27,9 +27,8 @@ export class TodoItem {
         this.description = description;
         this.tag = tag;
         this.priority = priority;
-        // this.projectId = projectId;
-        this.project = project;
-        this.isCompleted = isCompleted;
-        
+        this.projectId = projectId;
+        // this.project = project;
+        this.isCompleted = isCompleted;     
     };
 };

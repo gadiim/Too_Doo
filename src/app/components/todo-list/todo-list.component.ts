@@ -40,6 +40,7 @@ export class TodoListComponent {
 
   ngOnInit(): void {   //список завдань з mock або LocalStorage при ініціалізації
     this.getTodoItems(); 
+    this.getProjects();
   }
 
   ngOnChanges(): void {
@@ -50,6 +51,10 @@ export class TodoListComponent {
     this.todoItems = this.todoListService.getTodoItems();
     this.applyFilters(); // фільтруємо !
   }
+
+  getProjects(): void {
+    this.projects = this.projectListService.getProjects();
+  };
   /// filter block begin
   // // // // // // // // // // //
   // search
@@ -89,7 +94,7 @@ export class TodoListComponent {
     }
 
     if (this.filters.project) {
-      filteredItems = filteredItems.filter(item => item.project === this.filters.project);
+      filteredItems = filteredItems.filter(item => item.projectId == this.filters.project);
     }
     
     if (this.filters.priority) {

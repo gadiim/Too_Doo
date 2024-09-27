@@ -7,7 +7,7 @@
             class="clear-button"
             [ngClass]="{'active': 
             selectedIsCompleted === null && 
-            selectedProject === '' &&
+            selectedProject === 0 &&
             selectedPriority === '' && 
             selectedTag === '' &&
             selectedDays.length === 0 && 
@@ -65,18 +65,23 @@
     </div>
     
     <div *ngIf="isProjectContainerVisible" class="project-button-container">
-        <div class="project-button-wrapper" *ngFor="let item of todoItems">
+        <div class="project-button-wrapper" *ngFor="let item of todoItems" >
             <button 
-                [ngClass]="{'active': selectedProject === item.project}"
-                (click)="highlightProject(item.project)"
-                [ngStyle]="{ 'display': item.project ? 'block' : 'none' }">
-                {{ item.project }}
-            </button>
+            (click)="highlightProject(item.id)"
+            [ngClass]="{ 'active': selectedProject == item.projectId }"               
+            [ngStyle]="{ 'display': item.projectId ? 'block' : 'none' }">
+            <div *ngFor="let project of projects">
+                <ng-container *ngIf="item.projectId == project.id">
+                  {{ project.title }}
+                </ng-container>
+              </div>
+            <!-- {{ item.projectId }} -->
+        </button>
         </div>
         <div class="clear-button-wrapper">
             <button 
                 class="clear-button"
-                [ngClass]="{'active': selectedProject === ''}" 
+                [ngClass]="{'active': selectedProject === 0}" 
                 (click)="clearProject()">
                 Clear
             </button>
