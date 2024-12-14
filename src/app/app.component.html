@@ -14,10 +14,20 @@
         
         <hr style="margin-right: 20px;">
 
-        <img id="day-mode" src="../assets/icons/calendar_day.svg" alt="calendar_day"/>
+        
+        <img 
+          id="day-mode" 
+          src="../assets/icons/calendar_day.svg" 
+          alt="calendar_day"
+          (click)="applyTodayFilter()"
+          [ngClass]="{'active': filters.showTodayTasks}" />
         <img id="week-mode" src="../assets/icons/calendar_week.svg" alt="calendar_week"/>
         <img id="month-mode" src="../assets/icons/calendar_month.svg" alt="calendar_month"/>
         <img id="overdue-mode" src="../assets/icons/notification_important.svg" alt="overdue"/>
+<!-- <img id="day-mode" src="../../../assets/icons/calendar_day.svg" alt="calendar_day" (click)="applyTodayFilter()"/>
+        <img id="week-mode" src="../../../assets/icons/calendar_week.svg" alt="calendar_week" (click)="applyThisWeekFilter()"/>
+        <img id="month-mode" src="../../../assets/icons/calendar_month.svg" alt="calendar_month" (click)="applyThisMonthFilter()"/>
+        <img id="overdue-mode" src="../../../assets/icons/notification_important.svg" alt="overdue" (click)="applyOverdueFilter()"/> -->
 
         <hr style="margin-right: 20px;">
         <img id="view-mode" src="../assets/icons/view_list.svg" alt="view_list" />

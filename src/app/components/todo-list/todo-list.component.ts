@@ -48,11 +48,14 @@ export class TodoListComponent {
   getTodoItems(): void {
     this.todoItems = this.todoListService.getTodoItems();
     this.applyFilters(); // фільтруємо !
+
+
   }
 
   getProjects(): void {
     this.projects = this.projectListService.getProjects();
   };
+
   /// filter block begin
   // // // // // // // // // // //
   // search
@@ -64,10 +67,21 @@ export class TodoListComponent {
   applyFilters(): void {
     let filteredItems = this.todoListService.getTodoItems();
 
-    // const today = new Date();
-    // today.setHours(0, 0, 0, 0);
+    ///////////////////
+    if (this.filters.showTodayTasks) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Очищаємо час для точного порівняння дати
 
-
+      filteredItems = filteredItems.filter(item => {
+          const dueDate = typeof item.dueDate === 'string' ? new Date(item.dueDate) : item.dueDate;
+          return dueDate instanceof Date &&
+              dueDate.getDate() === today.getDate() &&
+              dueDate.getMonth() === today.getMonth() &&
+              dueDate.getFullYear() === today.getFullYear();
+      });
+      
+    }
+//////////////////////
 
     if (this.filters.isCompleted !== null) {
       filteredItems = filteredItems.filter(item => item.isCompleted === this.filters.isCompleted);
@@ -92,10 +106,12 @@ export class TodoListComponent {
     }
 
     if (this.filters.project) {
+      console.log('Filtering by project:', this.filters.project);
       filteredItems = filteredItems.filter(item => item.projectId == this.filters.project);
     }
     
     if (this.filters.priority) {
+      console.log('Filtering by priority:', this.filters.priority);
       filteredItems = filteredItems.filter(item => item.priority === this.filters.priority);
     }
 

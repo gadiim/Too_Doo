@@ -112,16 +112,24 @@ export class AppComponent {
     this.isTodoFormVisible = true;
   }
 
-  // applyFilters(filters: { isCompleted: boolean | null, months: number, priority: string, tag: string }): void {
-  applyFilters(filters: any): void {
-    this.filters = filters;  
-  }
 
   removeTodoItems(): void {
     this.todoListService.clearTodoItems();
     this.filters = { ...defaultTodoFilter };  // Використання дефолтних значень фільтра
     this.selectedTodoItem = null;  // Скидання вибраного елементу
   }
+/////////////////////
+// quickfilter
+applyTodayFilter(): void {
+  this.filters.showTodayTasks = !this.filters.showTodayTasks; // Перемикає стан фільтра
+  // this.applyFilters(this.filters); // Застосувати фільтри
+}
+  /////////////////////
+// filter
+  // applyFilters(filters: { isCompleted: boolean | null, months: number, priority: string, tag: string }): void {
+    applyFilters(filters: any): void {
+      this.filters = filters;  
+    }
 
 // project-form
 

@@ -38,6 +38,8 @@ export class TodoFilterComponent {
   mockPriority = mockPriority;
   mockTags = mockTags;
 
+  selectedShowTodayTasks: boolean | null = null;
+
   selectedIsCompleted: boolean | null = null;
   isIsCompletedContainerVisible = false;
 
@@ -113,11 +115,12 @@ highlightDay(day: number) {
   const index = this.selectedDays.indexOf(day);
   if (index === -1) {
     this.selectedDays.push(day); // Додаємо новий день, якщо він ще не вибраний
-  } else {
+  } 
+  else {
     this.selectedDays.splice(index, 1); // Видаляємо день, якщо він вже вибраний
   }
   this.onFilterChange();
-}
+};
 
 // clearDay() {
 //   this.selectedDay = 0;
@@ -125,7 +128,7 @@ highlightDay(day: number) {
 // }
 
 clearDay() {
-  this.selectedDays = []; // Очищуємо вибір днів
+  this.selectedDays = [];
   this.onFilterChange();
 }
 
@@ -150,6 +153,7 @@ clearDay() {
   highlightPriority(todoPriority: string) {
     this.selectedPriority = todoPriority;
     this.onFilterChange();
+  
   }
 
   togglePriorityContainer() {
@@ -193,8 +197,8 @@ clearDay() {
         months: this.selectedMonth,
         priority: this.selectedPriority,
         tag: this.selectedTag,
-        isToday: false
-
+        // isToday: false,
+        showTodayTasks: false,
       });
     }
 
@@ -205,7 +209,7 @@ clearDay() {
     this.selectedMonth = 0;
     this.selectedPriority = '';
     this.selectedTag = '';
-    
+    this.selectedShowTodayTasks = null;
     this.onFilterChange();
   }
 

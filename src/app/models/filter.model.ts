@@ -7,7 +7,8 @@ export interface TodoFilter {
     months: number;
     priority: string;
     tag: string;
-    isToday: boolean;
+    // isToday: boolean;
+    showTodayTasks: boolean; // New property to control today’s tasks filter
 }
 
 export const defaultTodoFilter: TodoFilter = {
@@ -17,7 +18,8 @@ export const defaultTodoFilter: TodoFilter = {
     months: 0,
     priority: '',
     tag: '',
-    isToday: false,
+    // isToday: false,
+    showTodayTasks: false, // Initialize to false
 };
 
 

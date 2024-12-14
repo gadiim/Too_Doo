@@ -13,7 +13,7 @@ export class TodoFilterService {
 
   highlightPriority(todoPriority: string): void {
     this.selectedPriority = todoPriority;
-  }
+  };
 
   highlightTag(todoTag: string): void {
     this.selectedTag = todoTag;
